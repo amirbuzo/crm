@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/user/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Preferences"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="Profile">
+			<p:panelGrid columns="2" rendered="#{myPreferenceController.currentUser != null}">
+
+				<p:outputLabel value="#{bundle.EditUserLabel_name}" for="name" />
+				<p:inputText id="name" value="#{myPreferenceController.currentUser.name}" title="#{bundle.EditUserTitle_name}" required="true"
+					requiredMessage="#{bundle.EditUserRequiredMessage_name}" />
+				<p:outputLabel value="#{bundle.EditUserLabel_surname}" for="surname" />
+				<p:inputText id="surname" value="#{myPreferenceController.currentUser.surname}" title="#{bundle.EditUserTitle_surname}" required="true"
+					requiredMessage="#{bundle.EditUserRequiredMessage_surname}" />
+				<p:outputLabel value="#{bundle.EditUserLabel_address}" for="address" />
+				<p:inputText id="address" value="#{myPreferenceController.currentUser.address}" title="#{bundle.EditUserTitle_address}" required="true"
+					requiredMessage="#{bundle.EditUserRequiredMessage_address}" />
+				<p:outputLabel value="#{bundle.EditUserLabel_phone}" for="phone" />
+				<p:inputText id="phone" value="#{myPreferenceController.currentUser.phone}" title="#{bundle.EditUserTitle_phone}" required="true"
+					requiredMessage="#{bundle.EditUserRequiredMessage_phone}" />
+				<p:outputLabel value="#{bundle.EditUserLabel_mobile}" for="mobile" />
+				<p:inputText id="mobile" value="#{myPreferenceController.currentUser.mobile}" title="#{bundle.EditUserTitle_mobile}" required="true"
+					requiredMessage="#{bundle.EditUserRequiredMessage_mobile}" />
+
+				<p:outputLabel value="#{bundle.email}" for="email" />
+				<p:inputText id="email" value="#{myPreferenceController.currentUser.email}" required="true" />
+				<p:outputLabel value="#{bundle.gender}" for="gender" />
+				<p:selectOneRadio id="gender" value="#{myPreferenceController.currentUser.gender}">
+					<f:selectItem itemLabel="male" itemValue="#{true}" />
+					<f:selectItem itemLabel="female" itemValue="#{false}" />
+				</p:selectOneRadio>
+
+				<p:outputLabel value="#{bundle.birthday}" for="birth" navigator="true" />
+				<p:calendar id="birth" value="#{myPreferenceController.currentUser.birthday}" pattern="MM/dd/yyyy">
+				</p:calendar>
+
+			</p:panelGrid>
+			<p:commandButton action="#{myPreferenceController.update}" value="#{bundle.Save}" update=":growl" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
+
+
+

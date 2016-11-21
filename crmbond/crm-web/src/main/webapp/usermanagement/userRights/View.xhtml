@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="UserRightsViewDlg" widgetVar="UserRightsViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewUserRightsTitle}">
+		<h:form id="UserRightsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{userRightsController.selected != null}">
+					<h:outputText value="#{bundle.ViewUserRightsLabel_id}" />
+					<h:outputText value="#{userRightsController.selected.id}" title="#{bundle.ViewUserRightsTitle_id}" />
+					<h:outputText value="#{bundle.ViewUserRightsLabel_name}" />
+					<h:outputText value="#{userRightsController.selected.name}" title="#{bundle.ViewUserRightsTitle_name}" />
+					<h:outputText value="#{bundle.ViewUserRightsLabel_description}" />
+					<h:outputText value="#{userRightsController.selected.description}" title="#{bundle.ViewUserRightsTitle_description}" />
+					<h:outputText value="#{bundle.ViewUserRightsLabel_moduleID}" />
+					<h:outputText value="#{userRightsController.selected.roleID.id}" title="#{bundle.ViewUserRightsTitle_moduleID}" />
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="UserRightsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

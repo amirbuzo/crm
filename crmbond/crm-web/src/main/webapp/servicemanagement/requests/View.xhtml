@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="RequestsViewDlg" widgetVar="RequestsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRequestsTitle}">
+		<h:form id="RequestsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{requestsController.selected != null}">
+					<h:outputText value="#{bundle.ViewRequestsLabel_id}" />
+					<h:outputText value="#{requestsController.selected.id}" title="#{bundle.ViewRequestsTitle_id}" />
+					<h:outputText value="#{bundle.ViewRequestsLabel_clientContactID}" />
+					<h:outputText value="#{requestsController.selected.clientContactID}" title="#{bundle.ViewRequestsTitle_clientContactID}" />
+					<h:outputText value="#{bundle.ViewRequestsLabel_userID}" />
+					<h:outputText value="#{requestsController.selected.userID}" title="#{bundle.ViewRequestsTitle_userID}" />
+					<h:outputText value="#{bundle.ViewRequestsLabel_status}" />
+					<h:outputText value="#{requestsController.selected.status}" title="#{bundle.ViewRequestsTitle_status}" />
+					<h:outputText value="#{bundle.ViewRequestsLabel_priority}" />
+					<h:outputText value="#{requestsController.selected.priority}" title="#{bundle.ViewRequestsTitle_priority}" />
+					<h:outputText value="#{bundle.ViewRequestsLabel_description}" />
+					<h:outputText value="#{requestsController.selected.description}" title="#{bundle.ViewRequestsTitle_description}" />
+					<h:outputText value="#{bundle.ViewRequestsLabel_isActive}" />
+					<p:selectBooleanCheckbox value="#{requestsController.selected.isActive}" disabled="true" />
+					<h:outputText value="#{bundle.ViewRequestsLabel_createdDate}" />
+					<h:outputText value="#{requestsController.selected.createdDate}" title="#{bundle.ViewRequestsTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewRequestsLabel_modifiedDate}" />
+					<h:outputText value="#{requestsController.selected.modifiedDate}" title="#{bundle.ViewRequestsTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewRequestsLabel_claimID}" />
+					<h:outputText value="#{requestsController.selected.claimID}" title="#{bundle.ViewRequestsTitle_claimID}" />
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="RequestsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

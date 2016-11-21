@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EventLogCreateDlg" widgetVar="EventLogCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEventLogTitle}">
+            <h:form id="EventLogCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{eventLogController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{eventLogController.selected.id}" title="#{bundle.CreateEventLogTitle_id}" required="true" requiredMessage="#{bundle.CreateEventLogRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_logTimestamp}" for="logTimestamp" />
+                        <p:calendar id="logTimestamp" pattern="MM/dd/yyyy HH:mm:ss" value="#{eventLogController.selected.logTimestamp}" title="#{bundle.EditEventLogTitle_logTimestamp}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_logLevel}" for="logLevel" />
+                        <p:inputTextarea rows="4" cols="30" id="logLevel" value="#{eventLogController.selected.logLevel}" title="#{bundle.CreateEventLogTitle_logLevel}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_threadName}" for="threadName" />
+                        <p:inputTextarea rows="4" cols="30" id="threadName" value="#{eventLogController.selected.threadName}" title="#{bundle.CreateEventLogTitle_threadName}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_className}" for="className" />
+                        <p:inputTextarea rows="4" cols="30" id="className" value="#{eventLogController.selected.className}" title="#{bundle.CreateEventLogTitle_className}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_logMessage}" for="logMessage" />
+                        <p:inputTextarea rows="4" cols="30" id="logMessage" value="#{eventLogController.selected.logMessage}" title="#{bundle.CreateEventLogTitle_logMessage}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exFull}" for="exFull" />
+                        <p:inputTextarea rows="4" cols="30" id="exFull" value="#{eventLogController.selected.exFull}" title="#{bundle.CreateEventLogTitle_exFull}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exShort}" for="exShort" />
+                        <p:inputTextarea rows="4" cols="30" id="exShort" value="#{eventLogController.selected.exShort}" title="#{bundle.CreateEventLogTitle_exShort}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exClassName}" for="exClassName" />
+                        <p:inputTextarea rows="4" cols="30" id="exClassName" value="#{eventLogController.selected.exClassName}" title="#{bundle.CreateEventLogTitle_exClassName}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exFileName}" for="exFileName" />
+                        <p:inputTextarea rows="4" cols="30" id="exFileName" value="#{eventLogController.selected.exFileName}" title="#{bundle.CreateEventLogTitle_exFileName}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exLineNumber}" for="exLineNumber" />
+                        <p:inputTextarea rows="4" cols="30" id="exLineNumber" value="#{eventLogController.selected.exLineNumber}" title="#{bundle.CreateEventLogTitle_exLineNumber}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exMethodName}" for="exMethodName" />
+                        <p:inputTextarea rows="4" cols="30" id="exMethodName" value="#{eventLogController.selected.exMethodName}" title="#{bundle.CreateEventLogTitle_exMethodName}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exMessage}" for="exMessage" />
+                        <p:inputTextarea rows="4" cols="30" id="exMessage" value="#{eventLogController.selected.exMessage}" title="#{bundle.CreateEventLogTitle_exMessage}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_exLocalizedMessage}" for="exLocalizedMessage" />
+                        <p:inputTextarea rows="4" cols="30" id="exLocalizedMessage" value="#{eventLogController.selected.exLocalizedMessage}" title="#{bundle.CreateEventLogTitle_exLocalizedMessage}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_userId}" for="userId" />
+                        <p:inputTextarea rows="4" cols="30" id="userId" value="#{eventLogController.selected.userId}" title="#{bundle.CreateEventLogTitle_userId}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_username}" for="username" />
+                        <p:inputTextarea rows="4" cols="30" id="username" value="#{eventLogController.selected.username}" title="#{bundle.CreateEventLogTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_objecttype}" for="objecttype" />
+                        <p:inputTextarea rows="4" cols="30" id="objecttype" value="#{eventLogController.selected.objecttype}" title="#{bundle.CreateEventLogTitle_objecttype}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_action}" for="action" />
+                        <p:inputTextarea rows="4" cols="30" id="action" value="#{eventLogController.selected.action}" title="#{bundle.CreateEventLogTitle_action}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_appid}" for="appid" />
+                        <p:inputTextarea rows="4" cols="30" id="appid" value="#{eventLogController.selected.appid}" title="#{bundle.CreateEventLogTitle_appid}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_usersession}" for="usersession" />
+                        <p:inputTextarea rows="4" cols="30" id="usersession" value="#{eventLogController.selected.usersession}" title="#{bundle.CreateEventLogTitle_usersession}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_event}" for="event" />
+                        <p:inputTextarea rows="4" cols="30" id="event" value="#{eventLogController.selected.event}" title="#{bundle.CreateEventLogTitle_event}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_objectid}" for="objectid" />
+                        <p:inputTextarea rows="4" cols="30" id="objectid" value="#{eventLogController.selected.objectid}" title="#{bundle.CreateEventLogTitle_objectid}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_moduleid}" for="moduleid" />
+                        <p:inputTextarea rows="4" cols="30" id="moduleid" value="#{eventLogController.selected.moduleid}" title="#{bundle.CreateEventLogTitle_moduleid}" />
+                        <p:outputLabel value="#{bundle.CreateEventLogLabel_resultid}" for="resultid" />
+                        <p:inputTextarea rows="4" cols="30" id="resultid" value="#{eventLogController.selected.resultid}" title="#{bundle.CreateEventLogTitle_resultid}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{eventLogController.create}" value="#{bundle.Save}" update="display,:EventLogListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventLogCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EventLogCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

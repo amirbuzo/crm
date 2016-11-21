@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+ 
+        <p:dialog id="DynamicFieldCreateDlg" widgetVar="DynamicFieldCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDynamicFieldTitle}">
+            <h:form id="DynamicFieldCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{dynamicFieldController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_fieldKey}" for="fieldKey" />
+                        <p:inputText id="fieldKey" value="#{dynamicFieldController.selected.fieldKey}" title="#{bundle.CreateDynamicFieldTitle_fieldKey}" required="true" requiredMessage="#{bundle.CreateDynamicFieldRequiredMessage_fieldKey}"/>
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_label}" for="label" />
+                        <p:inputText id="label" value="#{dynamicFieldController.selected.label}" title="#{bundle.CreateDynamicFieldTitle_label}" required="true" requiredMessage="#{bundle.CreateDynamicFieldRequiredMessage_label}"/>
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_length}" for="length" />
+                        <p:inputText id="length" value="#{dynamicFieldController.selected.length}" title="#{bundle.CreateDynamicFieldTitle_length}" required="true" requiredMessage="#{bundle.CreateDynamicFieldRequiredMessage_length}"/>
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_required}" for="required" />
+                        <p:selectBooleanCheckbox id="required" value="#{dynamicFieldController.selected.required}" required="true" requiredMessage="#{bundle.EditDynamicFieldRequiredMessage_required}"/>
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_requiredMessage}" for="requiredMessage" />
+                        <p:inputText id="requiredMessage" value="#{dynamicFieldController.selected.requiredMessage}" title="#{bundle.CreateDynamicFieldTitle_requiredMessage}" />
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_type}" for="type" />
+                        <p:selectOneMenu id="type" value="#{dynamicFieldController.selected.type}" title="#{bundle.CreateDynamicFieldTitle_type}" required="true" requiredMessage="#{bundle.CreateDynamicFieldRequiredMessage_type}">
+                         	<f:selectItem itemLabel="TEXT" itemValue="TEXT" />
+				            <f:selectItem itemLabel="SECRET" itemValue="SECRET" />
+				            <f:selectItem itemLabel="TEXTAREA" itemValue="TEXTAREA" />
+				            <f:selectItem itemLabel="RADIO" itemValue="RADIO" />
+				            <f:selectItem itemLabel="SELECTONE" itemValue="SELECTONE" />
+				            <f:selectItem itemLabel="NUMBER" itemValue="NUMBER" />
+				            <f:selectItem itemLabel="CHECKONE" itemValue="CHECKONE" />
+				            <f:selectItem itemLabel="DOUBLE" itemValue="DOUBLE" />
+				            <f:selectItem itemLabel="MASK" itemValue="MASKMASK" />
+				            <f:selectItem itemLabel="DATE" itemValue="DATE" />
+				            <f:selectItem itemLabel="DATETIME" itemValue="DATETIME" />
+                        </p:selectOneMenu>
+                   
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_entityType}" for="entityType" />
+                        <p:selectOneMenu id="entityType" value="#{dynamicFieldController.selected.entityType}" title="#{bundle.CreateDynamicFieldTitle_entityType}" >
+                        	<f:selectItem itemLabel="InteractionServices" itemValue="com.crm.entities.InteractionService" />
+				            <f:selectItem itemLabel="Client" itemValue="com.crm.entities.Client" />
+				            <f:selectItem itemLabel="Aims" itemValue="com.crm.entities.Aims" />
+				            <f:selectItem itemLabel="Contacts" itemValue="com.crm.entities.Contacts" />
+				            <f:selectItem itemLabel="PotentialContacts" itemValue="com.crm.entities.PotentialContacts" />
+				            <f:selectItem itemLabel="Company" itemValue="com.crm.entities.Company" />
+				            <f:selectItem itemLabel="User" itemValue="com.crm.entities.User" />
+				            <f:selectItem itemLabel="Articles" itemValue="com.crm.entities.Articles" />
+				            <f:selectItem itemLabel="Sales" itemValue="com.crm.entities.Sales" />
+				            <f:selectItem itemLabel="PotentialClient" itemValue="PotentialClient" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_mask}" for="mask" />
+                        <p:inputText id="mask" value="#{dynamicFieldController.selected.mask}" title="#{bundle.CreateDynamicFieldTitle_mask}" />
+                        <p:outputLabel value="#{bundle.CreateDynamicFieldLabel_regex}" for="regex" />
+                        <p:inputText id="regex" value="#{dynamicFieldController.selected.regex}" title="#{bundle.CreateDynamicFieldTitle_regex}" />
+                    </p:panelGrid>
+                    
+                    <p:dataTable id="fieldlist" styleClass="fixed-size" value="#{dynamicFieldController.selected.attributes.keySet()}" var="var">
+					<f:facet name="header">
+						<p:outputLabel value="#{bundle.dynamcifield}" />
+					</f:facet>
+					<p:column headerText="#{bundle.fieldname}"  >
+						<p:outputLabel value="#{var}" />
+					</p:column>
+					<p:column headerText="#{bundle.fieldvalue}"  >
+						<p:inputText value="#{dynamicFieldController.selected.attributes[var]}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:outputLabel value="#{bundle.fieldname}" />
+						<p:inputText id="field" value="#{dynamicFieldController.newfieldname}" />
+						<p:commandButton id="iconOnly" ajax="true" value="#{bundle.addfield}" process="@this,field" icon="ui-icon-plus"
+							actionListener="#{dynamicFieldController.addNewField(dynamicFieldController.newfieldname)}" update="DynamicFieldCreateForm:fieldlist" />
+					</f:facet>
+				</p:dataTable> 
+				
+                    <p:commandButton actionListener="#{dynamicFieldController.create}" value="#{bundle.Save}" update="display,:DynamicFieldListForm:datalist,:growl" oncomplete="handleSubmit(args,'DynamicFieldCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DynamicFieldCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

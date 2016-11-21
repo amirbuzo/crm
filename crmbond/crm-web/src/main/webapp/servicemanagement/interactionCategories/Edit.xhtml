@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="InteractionCategoriesEditDlg" widgetVar="InteractionCategoriesEditDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.EditInteractionCategoriesTitle}">
+		<h:form id="InteractionCategoriesEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{interactionCategoriesController.selected != null}">
+					<p:outputLabel value="#{bundle.EditInteractionCategoriesLabel_description}" for="description" />
+					<p:inputText id="description" value="#{interactionCategoriesController.selected.description}"
+						title="#{bundle.EditInteractionCategoriesTitle_description}" required="true"
+						requiredMessage="#{bundle.EditInteractionCategoriesRequiredMessage_description}" />
+					<p:outputLabel value="#{bundle.EditInteractionCategoriesLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{interactionCategoriesController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditInteractionCategoriesRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.EditInteractionCategoriesLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{interactionCategoriesController.selected.createdDate}"
+						title="#{bundle.EditInteractionCategoriesTitle_createdDate}" required="true"
+						requiredMessage="#{bundle.EditInteractionCategoriesRequiredMessage_createdDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.EditInteractionCategoriesLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{interactionCategoriesController.selected.modifiedDate}"
+						title="#{bundle.EditInteractionCategoriesTitle_modifiedDate}" required="true"
+						requiredMessage="#{bundle.EditInteractionCategoriesRequiredMessage_modifiedDate}" showOn="button" />
+				</p:panelGrid>
+				<p:commandButton actionListener="#{interactionCategoriesController.update}" value="#{bundle.Save}"
+					update="display,:InteractionCategoriesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InteractionCategoriesEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="InteractionCategoriesEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

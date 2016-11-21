@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="ContractsCreateDlg" widgetVar="ContractsCreateDialog" maximizable="true" dynamic="true" minimizable="true" position="center"  modal="true" resizable="true" appendTo="@(body)"
+		header="#{bundle.CreateContractsTitle}">
+		<h:form id="ContractsCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{contractsController.selected != null}">
+					<p:outputLabel value="#{bundle.CreateContractsLabel_clientID}" for="clientID" />
+					<p:inputText id="clientID" value="#{contractsController.selected.clientID}" title="#{bundle.CreateContractsTitle_clientID}" required="true"
+						requiredMessage="#{bundle.CreateContractsRequiredMessage_clientID}" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_dateStarted}" for="dateStarted" />
+					<p:calendar id="dateStarted" pattern="MM/dd/yyyy HH:mm:ss" value="#{contractsController.selected.dateStarted}"
+						title="#{bundle.EditContractsTitle_dateStarted}" required="true" requiredMessage="#{bundle.EditContractsRequiredMessage_dateStarted}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_dateFinished}" for="dateFinished" />
+					<p:calendar id="dateFinished" pattern="MM/dd/yyyy HH:mm:ss" value="#{contractsController.selected.dateFinished}"
+						title="#{bundle.EditContractsTitle_dateFinished}" required="true" requiredMessage="#{bundle.EditContractsRequiredMessage_dateFinished}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_status}" for="status" />
+					<p:inputText id="status" value="#{contractsController.selected.status}" title="#{bundle.CreateContractsTitle_status}" required="true"
+						requiredMessage="#{bundle.CreateContractsRequiredMessage_status}" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_contractValue}" for="contractValue" />
+					<p:inputText id="contractValue" value="#{contractsController.selected.contractValue}" title="#{bundle.CreateContractsTitle_contractValue}"
+						required="true" requiredMessage="#{bundle.CreateContractsRequiredMessage_contractValue}" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_exchangeRate}" for="exchangeRate" />
+					<p:inputText id="exchangeRate" value="#{contractsController.selected.exchangeRate}" title="#{bundle.CreateContractsTitle_exchangeRate}"
+						required="true" requiredMessage="#{bundle.CreateContractsRequiredMessage_exchangeRate}" />
+										<p:outputLabel value="#{bundle.CreateContractsLabel_contractDate}" for="contractDate" />
+					<p:calendar id="contractDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{contractsController.selected.contractDate}"
+						title="#{bundle.EditContractsTitle_contractDate}" required="true" requiredMessage="#{bundle.EditContractsRequiredMessage_contractDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_clientSign}" for="clientSign" />
+					<p:inputText id="clientSign" value="#{contractsController.selected.clientSign}" title="#{bundle.CreateContractsTitle_clientSign}" required="true"
+						requiredMessage="#{bundle.CreateContractsRequiredMessage_clientSign}" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_companySign}" for="companySign" />
+					<p:inputText id="companySign" value="#{contractsController.selected.companySign}" title="#{bundle.CreateContractsTitle_companySign}"
+						required="true" requiredMessage="#{bundle.CreateContractsRequiredMessage_companySign}" />
+					<p:outputLabel value="#{bundle.CreateContractsLabel_currency}" for="currency" />
+					<p:selectOneMenu id="currency" value="#{contractsController.selected.currency}" required="true"
+						requiredMessage="#{bundle.EditContractsRequiredMessage_currency}">
+						<f:selectItem itemLabel="#{userManager.userCurrency}" itemValue="#{userManager.userCurrency}" selected="true"/>
+						<f:selectItems value="#{currencyController.itemsAvailableSelectOne}" var="currencyItem" itemValue="#{currencyItem}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="#{bundle.CreateContractsLabel_type}" for="type" />
+					<p:selectOneMenu id="type" value="#{contractsController.selected.type}" required="true"
+						requiredMessage="#{bundle.EditContractsRequiredMessage_type}">
+						<f:selectItems value="#{contractTypesController.itemsAvailableSelectOne}" var="typeItem" itemValue="#{typeItem}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+
+				<p:dataTable id="fieldlist" styleClass="fixed-size" value="#{contractsController.selected.attributes.keySet()}" var="var">
+					<f:facet name="header">
+						<p:outputLabel value="#{bundle.dynamcifield}" />
+					</f:facet>
+					<p:column headerText="#{bundle.fieldname}"  >
+						<p:outputLabel value="#{var}" />
+					</p:column>
+					<p:column headerText="#{bundle.fieldvalue}"  >
+						<p:inputText value="#{contractsController.selected.attributes[var]}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:outputLabel value="#{bundle.fieldname}" />
+						<p:inputText id="field" value="#{contractsController.newfieldname}" />
+						<p:commandButton id="iconOnly" ajax="true" value="#{bundle.addfield}" process="@this,field" icon="ui-icon-plus"
+							actionListener="#{contractsController.addNewField(contractsController.newfieldname)}" update="ContractsCreateForm:fieldlist" />
+					</f:facet>
+				</p:dataTable>
+				<p:outputLabel value="#{bundle.CreateContractsLabel_information}" for="information" />
+					<p:editor style="height: 200px" id="information" value="#{contractsController.selected.information}"
+						title="#{bundle.CreateContractsTitle_information}" required="true" requiredMessage="#{bundle.CreateContractsRequiredMessage_information}" />
+
+	
+				<p:commandButton actionListener="#{contractsController.create}" value="#{bundle.Save}" update="display,:ContractsListForm:datalist,:growl"
+					oncomplete="handleSubmit(args,'ContractsCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="ContractsCreateDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="PotentialContactsViewDlg" widgetVar="PotentialContactsViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewPotentialContactsTitle}">
+		<h:form id="PotentialContactsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{potentialContactsController.selected != null}">
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_id}" />
+					<h:outputText value="#{potentialContactsController.selected.id}" title="#{bundle.ViewPotentialContactsTitle_id}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_name}" />
+					<h:outputText value="#{potentialContactsController.selected.name}" title="#{bundle.ViewPotentialContactsTitle_name}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_surname}" />
+					<h:outputText value="#{potentialContactsController.selected.surname}" title="#{bundle.ViewPotentialContactsTitle_surname}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_phone}" />
+					<h:outputText value="#{potentialContactsController.selected.phone}" title="#{bundle.ViewPotentialContactsTitle_phone}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_mobilePhone}" />
+					<h:outputText value="#{potentialContactsController.selected.mobilePhone}" title="#{bundle.ViewPotentialContactsTitle_mobilePhone}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_email}" />
+					<h:outputText value="#{potentialContactsController.selected.email}" title="#{bundle.ViewPotentialContactsTitle_email}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_priority}" />
+					<h:outputText value="#{potentialContactsController.selected.priority}" title="#{bundle.ViewPotentialContactsTitle_priority}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_address}" />
+					<h:outputText value="#{potentialContactsController.selected.address}" title="#{bundle.ViewPotentialContactsTitle_address}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_userAssign}" />
+					<h:outputText value="#{potentialContactsController.selected.userAssign}" title="#{bundle.ViewPotentialContactsTitle_userAssign}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_userCreated}" />
+					<h:outputText value="#{potentialContactsController.selected.userCreated}" title="#{bundle.ViewPotentialContactsTitle_userCreated}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_information}" />
+					<h:outputText value="#{potentialContactsController.selected.information}" title="#{bundle.ViewPotentialContactsTitle_information}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_status}" />
+					<h:outputText value="#{potentialContactsController.selected.status}" title="#{bundle.ViewPotentialContactsTitle_status}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_isActive}" />
+					<p:selectBooleanCheckbox value="#{potentialContactsController.selected.isActive}" disabled="true" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_createdDate}" />
+					<h:outputText value="#{potentialContactsController.selected.createdDate}" title="#{bundle.ViewPotentialContactsTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_modifiedDate}" />
+					<h:outputText value="#{potentialContactsController.selected.modifiedDate}" title="#{bundle.ViewPotentialContactsTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_referenca}" />
+					<h:outputText value="#{potentialContactsController.selected.referenca}" title="#{bundle.ViewPotentialContactsTitle_referenca}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_category}" />
+					<h:outputText value="#{potentialContactsController.selected.category}" title="#{bundle.ViewPotentialContactsTitle_category}" />
+					<h:outputText value="#{bundle.ViewPotentialContactsLabel_potentialClient}" />
+					<h:outputText value="#{potentialContactsController.selected.potentialClient}" title="#{bundle.ViewPotentialContactsTitle_potentialClient}" />
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="PotentialContactsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

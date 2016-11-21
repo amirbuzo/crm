@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="ContractTypesViewDlg" widgetVar="ContractTypesViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewContractTypesTitle}">
+		<h:form id="ContractTypesViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{contractTypesController.selected != null}">
+					<h:outputText value="#{bundle.ViewContractTypesLabel_id}" />
+					<h:outputText value="#{contractTypesController.selected.id}" title="#{bundle.ViewContractTypesTitle_id}" />
+					<h:outputText value="#{bundle.ViewContractTypesLabel_description}" />
+					<h:outputText value="#{contractTypesController.selected.description}" title="#{bundle.ViewContractTypesTitle_description}" />
+					<h:outputText value="#{bundle.ViewContractTypesLabel_isActive}" />
+					<p:selectBooleanCheckbox value="#{contractTypesController.selected.isActive}" disabled="true" />
+					<h:outputText value="#{bundle.ViewContractTypesLabel_createdDate}" />
+					<h:outputText value="#{contractTypesController.selected.createdDate}" title="#{bundle.ViewContractTypesTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewContractTypesLabel_modifiedDate}" />
+					<h:outputText value="#{contractTypesController.selected.modifiedDate}" title="#{bundle.ViewContractTypesTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:panelGrid>
+				<crm:generals item="#{contractTypesController.selected}" />
+
+				<p:commandButton value="#{bundle.Close}" onclick="ContractTypesViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

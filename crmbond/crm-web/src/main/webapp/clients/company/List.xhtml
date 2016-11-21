@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/clients/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListCompanyTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="CompanyListForm">
+			<p:contextMenu for="datalist">
+				<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{companyController.prepareCreate}"
+					update=":CompanyCreateForm" oncomplete="PF('CompanyCreateDialog').show()" />
+				<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":CompanyViewForm" oncomplete="PF('CompanyViewDialog').show()" />
+				<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CompanyEditForm" oncomplete="PF('CompanyEditDialog').show()" />
+				<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{companyController.destroy}" update=":growl,datalist" />
+			</p:contextMenu>
+			<p:panel header="#{bundle.ListCompanyTitle}">
+				<p:dataTable id="datalist" value="#{companyController.items}" var="item" selectionMode="single" selection="#{companyController.selected}"
+					paginator="true" rowKey="#{item.id}" lazy="true" rows="10" rowsPerPageTemplate="10,20,30,40,50"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+					scrollable="true" resizableColumns="true" liveResize="true" draggableColumns="true">
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Search all fields:" />
+							<p:inputText id="globalFilter" onkeyup="PF('datalist').filter()" style="width:150px" placeholder="Enter keyword" />
+						</p:outputPanel>
+					</f:facet>
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<p:graphicImage name="/img/excel.png" width="24" />
+							<p:dataExporter type="xls" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/csv.png" width="24" />
+							<p:dataExporter type="csv" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/xml.png" width="24" />
+							<p:dataExporter type="xml" target="datalist" fileName="cars" />
+						</h:commandLink>
+						<p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+						<p:columnToggler datasource="datalist" trigger="toggler" />
+					</f:facet>
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+
+
+					<p:column sortBy="#{item.id}" filterBy="#{item.id}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column sortBy="#{item.nipt}" filterBy="#{item.nipt}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_nipt}" />
+						</f:facet>
+						<h:outputText value="#{item.nipt}" />
+					</p:column>
+					<p:column sortBy="#{item.name}" filterBy="#{item.name}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_name}" />
+						</f:facet>
+						<h:outputText value="#{item.name}" />
+					</p:column>
+					<p:column sortBy="#{item.status}" filterBy="#{item.status}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_status}" />
+						</f:facet>
+						<h:outputText value="#{item.status}" />
+					</p:column>
+					<p:column sortBy="#{item.representative}" filterBy="#{item.representative}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_representative}" />
+						</f:facet>
+						<h:outputText value="#{item.representative}" />
+					</p:column>
+					<p:column sortBy="#{item.region}" filterBy="#{item.region}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_region}" />
+						</f:facet>
+						<h:outputText value="#{item.region}" />
+					</p:column>
+					<p:column sortBy="#{item.createdDate}" filterBy="#{item.createdDate}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_createdDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.createdDate}" />
+					</p:column>
+					<p:column sortBy="#{item.modifiedDate}" filterBy="#{item.modifiedDate}" footerText="contains" filterMatchMode="equals">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCompanyTitle_modifiedDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.modifiedDate}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{companyController.prepareCreate}"
+							update=":CompanyCreateForm" oncomplete="PF('CompanyCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":CompanyViewForm"
+							oncomplete="PF('CompanyViewDialog').show()" disabled="#{empty companyController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CompanyEditForm"
+							oncomplete="PF('CompanyEditDialog').show()" disabled="#{empty companyController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{companyController.destroy}"
+							update=":growl,datalist" disabled="#{empty companyController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

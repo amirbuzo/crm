@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<Resource id="jdts" type="javax.sql.DataSource">
+		jdbcDriver=net.sourceforge.jtds.jdbc.Driver
+		jdbcUrl=jdbc\:jtds\:sqlserver\://127.0.0.1\:1433/CRM
+		password=crm
+		userName=crm		
+		maxActive = 20
+		initialSize=0
+		maxActive=80
+		maxIdle =30
+		minIdle=20
+		timeBetweenEvictionRunsMillis=30000
+		minEvictableIdleTimeMillis=60000
+		testOnBorrow=true
+		validationQuery=SELECT 1
+		validationInterval=30000
+		removeAbandoned=true
+		removeAbandonedTimeout=60
+		logAbandoned=true
+		abandonWhenPercentageFull=60
+		jdbcInterceptors=org.apache.tomcat.jdbc.pool.interceptor.ResetAbandonedTimer
+	</Resource>
+
+<!-- 	<Resource id="jdts" type="javax.sql.DataSource"> -->
+<!-- 		jdbcDriver=com.mysql.jdbc.Driver -->
+<!-- 		jdbcUrl=jdbc\:mysql\://localhost\:3306/crm -->
+<!-- 		password=root -->
+<!-- 		userName=root		 -->
+<!-- 		maxActive = 20 -->
+<!-- 		initialSize=0 -->
+<!-- 		maxActive=80 -->
+<!-- 		maxIdle =30 -->
+<!-- 		minIdle=20 -->
+<!-- 		timeBetweenEvictionRunsMillis=30000 -->
+<!-- 		minEvictableIdleTimeMillis=60000 -->
+<!-- 		testOnBorrow=true -->
+<!-- 		validationQuery=SELECT 1 -->
+<!-- 		validationInterval=30000 -->
+<!-- 		removeAbandoned=true -->
+<!-- 		removeAbandonedTimeout=60 -->
+<!-- 		logAbandoned=true -->
+<!-- 		abandonWhenPercentageFull=60 -->
+<!-- 		jdbcInterceptors=org.apache.tomcat.jdbc.pool.interceptor.ResetAbandonedTimer -->
+<!-- 	</Resource> -->
+
+</resources>

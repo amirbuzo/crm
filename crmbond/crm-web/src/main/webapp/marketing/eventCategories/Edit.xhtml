@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="EventCategoriesEditDlg" widgetVar="EventCategoriesEditDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.EditEventCategoriesTitle}">
+		<h:form id="EventCategoriesEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{eventCategoriesController.selected != null}">
+					<p:outputLabel value="#{bundle.EditEventCategoriesLabel_description}" for="description" />
+					<p:inputText id="description" value="#{eventCategoriesController.selected.description}" title="#{bundle.EditEventCategoriesTitle_description}"
+						required="true" requiredMessage="#{bundle.EditEventCategoriesRequiredMessage_description}" />
+					<p:outputLabel value="#{bundle.EditEventCategoriesLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{eventCategoriesController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditEventCategoriesRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.EditEventCategoriesLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{eventCategoriesController.selected.createdDate}"
+						title="#{bundle.EditEventCategoriesTitle_createdDate}" required="true"
+						requiredMessage="#{bundle.EditEventCategoriesRequiredMessage_createdDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.EditEventCategoriesLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{eventCategoriesController.selected.modifiedDate}"
+						title="#{bundle.EditEventCategoriesTitle_modifiedDate}" required="true"
+						requiredMessage="#{bundle.EditEventCategoriesRequiredMessage_modifiedDate}" showOn="button" />
+				</p:panelGrid>
+				<p:commandButton actionListener="#{eventCategoriesController.update}" value="#{bundle.Save}"
+					update="display,:EventCategoriesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EventCategoriesEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="EventCategoriesEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

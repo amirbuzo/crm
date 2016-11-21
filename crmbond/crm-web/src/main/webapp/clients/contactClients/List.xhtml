@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/clients/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListContactClientsTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="ContactClientsListForm">
+			<p:panel header="#{bundle.ListContactClientsTitle}">
+				<p:contextMenu for="datalist">
+					<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{contactClientsController.prepareCreate}"
+						update=":ContactClientsCreateForm" oncomplete="PF('ContactClientsCreateDialog').show()" />
+					<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":ContactClientsViewForm"
+						oncomplete="PF('ContactClientsViewDialog').show()" />
+					<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContactClientsEditForm"
+						oncomplete="PF('ContactClientsEditDialog').show()" />
+					<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{contactClientsController.destroy}"
+						update=":growl,datalist" />
+				</p:contextMenu>
+				<p:dataTable id="datalist" value="#{contactClientsController.items}" var="item" selectionMode="single"
+					selection="#{contactClientsController.selected}" paginator="true" rowKey="#{item.id}" rows="10" lazy="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+					rowsPerPageTemplate="10,20,30,40,50" scrollable="true" resizableColumns="true" liveResize="true" draggableColumns="true">
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<p:graphicImage name="/img/excel.png" width="24" />
+							<p:dataExporter type="xls" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/csv.png" width="24" />
+							<p:dataExporter type="csv" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/xml.png" width="24" />
+							<p:dataExporter type="xml" target="datalist" fileName="cars" />
+						</h:commandLink>
+						<p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+						<p:columnToggler datasource="datalist" trigger="toggler" />
+					</f:facet>
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_name}" />
+						</f:facet>
+						<h:outputText value="#{item.name}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_surname}" />
+						</f:facet>
+						<h:outputText value="#{item.surname}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_position}" />
+						</f:facet>
+						<h:outputText value="#{item.position}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_departament}" />
+						</f:facet>
+						<h:outputText value="#{item.departament}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_email}" />
+						</f:facet>
+						<h:outputText value="#{item.email}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_officeAddress}" />
+						</f:facet>
+						<h:outputText value="#{item.officeAddress}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_information}" />
+						</f:facet>
+						<h:outputText value="#{item.information}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_officeNumber}" />
+						</f:facet>
+						<h:outputText value="#{item.officeNumber}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_mobilePhone}" />
+						</f:facet>
+						<h:outputText value="#{item.mobilePhone}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_fax}" />
+						</f:facet>
+						<h:outputText value="#{item.fax}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_userModified}" />
+						</f:facet>
+						<h:outputText value="#{item.userModified}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_userCreated}" />
+						</f:facet>
+						<h:outputText value="#{item.userCreated}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_isActive}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.isActive}" disabled="true" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_createdDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.createdDate}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_modifiedDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.modifiedDate}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContactClientsTitle_clientID}" />
+						</f:facet>
+						<h:outputText value="#{item.clientID}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{contactClientsController.prepareCreate}"
+							update=":ContactClientsCreateForm" oncomplete="PF('ContactClientsCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":ContactClientsViewForm"
+							oncomplete="PF('ContactClientsViewDialog').show()" disabled="#{empty contactClientsController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContactClientsEditForm"
+							oncomplete="PF('ContactClientsEditDialog').show()" disabled="#{empty contactClientsController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{contactClientsController.destroy}"
+							update=":growl,datalist" disabled="#{empty contactClientsController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

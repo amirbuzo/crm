@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="UserPermissionViewDlg" widgetVar="UserPermissionViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewUserPermissionTitle}">
+		<h:form id="UserPermissionViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{userPermissionController.selected != null}">
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_userPermissionPK_userRefID}" />
+					<h:outputText value="#{userPermissionController.selected.userRefID}" title="#{bundle.ViewUserPermissionTitle_userPermissionPK_userRefID}" />
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_userPermissionPK_rightRefID}" />
+					<h:outputText value="#{userPermissionController.selected.rightRefID}" title="#{bundle.ViewUserPermissionTitle_userPermissionPK_rightRefID}" />
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_id}" />
+					<h:outputText value="#{userPermissionController.selected.id}" title="#{bundle.ViewUserPermissionTitle_id}" />
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_readRight}" />
+					<p:selectBooleanCheckbox value="#{userPermissionController.selected.readRight}" disabled="true" />
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_writeRight}" />
+					<p:selectBooleanCheckbox value="#{userPermissionController.selected.writeRight}" disabled="true" />
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_executeRight}" />
+					<p:selectBooleanCheckbox value="#{userPermissionController.selected.executeRight}" disabled="true" />
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_userID}" />
+					<h:outputText value="#{userPermissionController.selected.userRefID}" title="#{bundle.ViewUserPermissionTitle_userID}" />
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_CDate}" />
+					<h:outputText value="#{userPermissionController.selected.createdDate}" title="#{bundle.ViewUserPermissionTitle_CDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewUserPermissionLabel_lastUpdate}" />
+					<h:outputText value="#{userPermissionController.selected.modifiedDate}" title="#{bundle.ViewUserPermissionTitle_lastUpdate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="UserPermissionViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

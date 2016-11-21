@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="PotentialClientsEditDlg" widgetVar="PotentialClientsEditDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.EditPotentialClientsTitle}">
+		<h:form id="PotentialClientsEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{potentialClientsController.selected != null}">
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_name}" for="name" />
+					<p:inputText id="name" value="#{potentialClientsController.selected.name}" title="#{bundle.EditPotentialClientsTitle_name}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_name}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_phone}" for="phone" />
+					<p:inputText id="phone" value="#{potentialClientsController.selected.phone}" title="#{bundle.EditPotentialClientsTitle_phone}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_phone}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_mobilePhone}" for="mobilePhone" />
+					<p:inputText id="mobilePhone" value="#{potentialClientsController.selected.mobilePhone}" title="#{bundle.EditPotentialClientsTitle_mobilePhone}"
+						required="true" requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_mobilePhone}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_priority}" for="priority" />
+					<p:inputText id="priority" value="#{potentialClientsController.selected.priority}" title="#{bundle.EditPotentialClientsTitle_priority}"
+						required="true" requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_priority}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_address}" for="address" />
+					<p:inputText id="address" value="#{potentialClientsController.selected.address}" title="#{bundle.EditPotentialClientsTitle_address}"
+						required="true" requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_address}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_email}" for="email" />
+					<p:inputText id="email" value="#{potentialClientsController.selected.email}" title="#{bundle.EditPotentialClientsTitle_email}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_email}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_information}" for="information" />
+					<p:inputText id="information" value="#{potentialClientsController.selected.information}" title="#{bundle.EditPotentialClientsTitle_information}"
+						required="true" requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_information}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_status}" for="status" />
+					<p:inputText id="status" value="#{potentialClientsController.selected.status}" title="#{bundle.EditPotentialClientsTitle_status}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_status}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_userCreated}" for="userCreated" />
+					<p:inputText id="userCreated" value="#{potentialClientsController.selected.userCreated}" title="#{bundle.EditPotentialClientsTitle_userCreated}"
+						required="true" requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_userCreated}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{potentialClientsController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{potentialClientsController.selected.createdDate}"
+						title="#{bundle.EditPotentialClientsTitle_createdDate}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_createdDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.EditPotentialClientsLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{potentialClientsController.selected.modifiedDate}"
+						title="#{bundle.EditPotentialClientsTitle_modifiedDate}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_modifiedDate}" showOn="button" />
+				</p:panelGrid>
+				<p:commandButton actionListener="#{potentialClientsController.update}" value="#{bundle.Save}"
+					update="display,:PotentialClientsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PotentialClientsEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="PotentialClientsEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

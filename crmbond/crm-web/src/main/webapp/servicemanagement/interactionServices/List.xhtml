@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/servicemanagement/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListInteractionServicesTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="InteractionServicesListForm">
+			<p:contextMenu for="datalist">
+				<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{interactionServicesController.prepareCreate}"
+					update=":InteractionServicesCreateForm" oncomplete="PF('InteractionServicesCreateDialog').show()" />
+				<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":InteractionServicesViewForm"
+					oncomplete="PF('InteractionServicesViewDialog').show()" />
+				<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":InteractionServicesEditForm"
+					oncomplete="PF('InteractionServicesEditDialog').show()" />
+				<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{interactionServicesController.destroy}"
+					update=":growl,datalist" />
+			</p:contextMenu>
+			<p:panel header="#{bundle.ListInteractionServicesTitle}">
+				<p:dataTable id="datalist" value="#{interactionServicesController.items}" var="item" selectionMode="single"
+					selection="#{interactionServicesController.selected}" paginator="true" rowKey="#{item.id}"
+					paginatorTemplate="{RowsPerPageDropdown} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}" rows="10"
+					lazy="true" rowsPerPageTemplate="10,20,30,40,50" scrollable="true" resizableColumns="true" liveResize="true" draggableColumns="true">
+
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<p:graphicImage name="/img/excel.png" width="24" />
+							<p:dataExporter type="xls" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/csv.png" width="24" />
+							<p:dataExporter type="csv" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/xml.png" width="24" />
+							<p:dataExporter type="xml" target="datalist" fileName="cars" />
+						</h:commandLink>
+						<p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+						<p:columnToggler datasource="datalist" trigger="toggler" />
+					</f:facet>
+
+					<p:column sortBy="#{item.id}"   filterBy="#{item.id}" toggleable="false" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+
+					<p:column sortBy="#{item.clientContactID}">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_clientContactID}" />
+						</f:facet>
+						<h:outputText value="#{item.clientContactID.name}" />
+					</p:column>
+
+					<p:column sortBy="#{item.place}" filterBy="#{item.place}" visible="false"  footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_place}" />
+						</f:facet>
+						<h:outputText value="#{utils.place.get(item.place.toString())}" />
+					</p:column>
+					<p:column sortBy="#{item.dateStarted}" filterBy="#{item.dateStarted}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_dateStarted}" />
+						</f:facet>
+						<h:outputText value="#{item.dateStarted}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column sortBy="#{item.dateFinished}" filterBy="#{item.dateFinished}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_dateFinished}" />
+						</f:facet>
+						<h:outputText value="#{item.dateFinished}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column sortBy="#{item.status}" filterBy="#{item.status}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_status}" />
+						</f:facet>
+						<h:outputText value="#{utils.interactionservicestatus[item.status.toString()]}" />
+					</p:column>
+					<p:column sortBy="#{item.priority}"  filterBy="#{item.priority}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_priority}" />
+						</f:facet>
+						<h:outputText value="#{item.priority.priorityName}" />
+					</p:column>
+					<p:column sortBy="#{item.contract}" filterBy="#{item.contract}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_contract}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.contract}" disabled="true" />
+					</p:column>
+					<p:column sortBy="#{item.price}" filterBy="#{item.price}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_price}" />
+						</f:facet>
+						<h:outputText value="#{item.price}" />
+					</p:column>
+					<p:column sortBy="#{item.otherCost}" filterBy="#{item.otherCost}" visible="false" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_otherCost}" />
+						</f:facet>
+						<h:outputText value="#{item.otherCost}" />
+					</p:column>
+					<p:column sortBy="#{item.currency}" visible="false"  filterBy="#{item.currency}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_currency}" />
+						</f:facet>
+						<h:outputText value="#{item.currency.code}" />
+					</p:column>
+					<p:column sortBy="#{item.exchangeRate}" filterBy="#{item.exchangeRate}" footerText="contains" filterMatchMode="contains" visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_exchangeRate}" />
+						</f:facet>
+						<h:outputText value="#{item.exchangeRate}" />
+					</p:column>
+					<p:column sortBy="#{item.period}" filterBy="#{item.period}" footerText="contains" filterMatchMode="contains">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_period}" />
+						</f:facet>
+						<h:outputText value="#{item.period}" />
+					</p:column>
+
+					<p:column sortBy="#{item.categoryID}" visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_categoryID}" />
+						</f:facet>
+						<h:outputText value="#{item.categoryID.description}" />
+					</p:column>
+
+					<p:column sortBy="#{item.aimID}" visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListInteractionServicesTitle_aimID}" />
+						</f:facet>
+						<h:outputText value="#{item.aimID.aimDescription}" />
+					</p:column>
+					
+								<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_userModified}" />
+						</f:facet>
+						<h:outputText value="#{item.userModified}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_userCreated}" />
+						</f:facet>
+						<h:outputText value="#{item.userCreated}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_isActive}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.isActive}" disabled="true" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_createdDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.createdDate}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_modifiedDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.modifiedDate}" />
+					</p:column>
+					
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{interactionServicesController.prepareCreate}"
+							update=":InteractionServicesCreateForm" oncomplete="PF('InteractionServicesCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":InteractionServicesViewForm"
+							oncomplete="PF('InteractionServicesViewDialog').show()" disabled="#{empty interactionServicesController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":InteractionServicesEditForm"
+							oncomplete="PF('InteractionServicesEditDialog').show()" disabled="#{empty interactionServicesController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{interactionServicesController.destroy}"
+							update=":growl,datalist" disabled="#{empty interactionServicesController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="PrioritiesViewDlg" widgetVar="PrioritiesViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewPrioritiesTitle}">
+		<h:form id="PrioritiesViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{prioritiesController.selected != null}">
+					<h:outputText value="#{bundle.ViewPrioritiesLabel_id}" />
+					<h:outputText value="#{prioritiesController.selected.id}" title="#{bundle.ViewPrioritiesTitle_id}" />
+					<h:outputText value="#{bundle.ViewPrioritiesLabel_priorityName}" />
+					<h:outputText value="#{prioritiesController.selected.priorityName}" title="#{bundle.ViewPrioritiesTitle_priorityName}" />
+
+				</p:panelGrid>
+				<crm:generals item="#{prioritiesController.selected}" />
+
+				<p:commandButton value="#{bundle.Close}" onclick="PrioritiesViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

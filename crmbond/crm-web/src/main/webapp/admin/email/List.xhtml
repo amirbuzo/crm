@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/admin/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListEmailTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="EmailListForm">
+			<p:contextMenu for="datalist">
+				<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{emailController.prepareCreate}"
+					update=":EmailCreateForm" oncomplete="PF('EmailCreateDialog').show()" />
+				<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EmailViewForm" oncomplete="PF('EmailViewDialog').show()" />
+				<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EmailEditForm" oncomplete="PF('EmailEditDialog').show()" />
+				<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{emailController.destroy}" update=":growl,datalist" />
+			</p:contextMenu>
+			<p:panel header="#{bundle.ListEmailTitle}">
+				<p:dataTable id="datalist" value="#{emailController.items}" var="item" selectionMode="single" selection="#{emailController.selected}"
+					paginator="true" rowKey="#{item.id}" rows="10" rowsPerPageTemplate="10,20,30,40,50">
+
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEmailTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEmailTitle_email}" />
+						</f:facet>
+						<h:outputText value="#{item.email}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEmailTitle_password}" />
+						</f:facet>
+						<h:outputText value="#{item.password}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEmailTitle_isActive}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.isActive}" disabled="true" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEmailTitle_createdDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.createdDate}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEmailTitle_modifiedDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.modifiedDate}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{emailController.prepareCreate}"
+							update=":EmailCreateForm" oncomplete="PF('EmailCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EmailViewForm" oncomplete="PF('EmailViewDialog').show()"
+							disabled="#{empty emailController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EmailEditForm" oncomplete="PF('EmailEditDialog').show()"
+							disabled="#{empty emailController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{emailController.destroy}"
+							update=":growl,datalist" disabled="#{empty emailController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

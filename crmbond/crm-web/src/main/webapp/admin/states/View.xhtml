@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="StatesViewDlg" widgetVar="StatesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewStatesTitle}">
+		<h:form id="StatesViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{statesController.selected != null}">
+					<h:outputText value="#{bundle.ViewStatesLabel_id}" />
+					<h:outputText value="#{statesController.selected.id}" title="#{bundle.ViewStatesTitle_id}" />
+					<h:outputText value="#{bundle.ViewStatesLabel_code}" />
+					<h:outputText value="#{statesController.selected.code}" title="#{bundle.ViewStatesTitle_code}" />
+					<h:outputText value="#{bundle.ViewStatesLabel_description}" />
+					<h:outputText value="#{statesController.selected.description}" title="#{bundle.ViewStatesTitle_description}" />
+
+				</p:panelGrid>
+				<crm:generals item="#{statesController.selected}" />
+
+				<p:commandButton value="#{bundle.Close}" onclick="StatesViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

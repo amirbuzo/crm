@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="EventsCreateDlg" widgetVar="EventsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEventsTitle}">
+		<h:form id="EventsCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{eventsController.selected != null}">
+					<p:outputLabel value="#{bundle.CreateEventsLabel_contactID}" for="contactID" />
+					<p:inputText id="contactID" value="#{eventsController.selected.contactID}" title="#{bundle.CreateEventsTitle_contactID}" required="true"
+						requiredMessage="#{bundle.CreateEventsRequiredMessage_contactID}" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_contactWay}" for="contactWay" />
+					<p:inputText id="contactWay" value="#{eventsController.selected.contactWay}" title="#{bundle.CreateEventsTitle_contactWay}" required="true"
+						requiredMessage="#{bundle.CreateEventsRequiredMessage_contactWay}" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_contactDate}" for="contactDate" />
+					<p:calendar id="contactDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{eventsController.selected.contactDate}"
+						title="#{bundle.EditEventsTitle_contactDate}" required="true" requiredMessage="#{bundle.EditEventsRequiredMessage_contactDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_userCreated}" for="userCreated" />
+					<p:inputText id="userCreated" value="#{eventsController.selected.userCreated}" title="#{bundle.CreateEventsTitle_userCreated}" required="true"
+						requiredMessage="#{bundle.CreateEventsRequiredMessage_userCreated}" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_information}" for="information" />
+					<p:inputText id="information" value="#{eventsController.selected.information}" title="#{bundle.CreateEventsTitle_information}" required="true"
+						requiredMessage="#{bundle.CreateEventsRequiredMessage_information}" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_reContact}" for="reContact" />
+					<p:selectBooleanCheckbox id="reContact" value="#{eventsController.selected.reContact}" required="true"
+						requiredMessage="#{bundle.EditEventsRequiredMessage_reContact}" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_reContactDate}" for="reContactDate" />
+					<p:calendar id="reContactDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{eventsController.selected.reContactDate}"
+						title="#{bundle.EditEventsTitle_reContactDate}" required="true" requiredMessage="#{bundle.EditEventsRequiredMessage_reContactDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_reContactWay}" for="reContactWay" />
+					<p:inputText id="reContactWay" value="#{eventsController.selected.reContactWay}" title="#{bundle.CreateEventsTitle_reContactWay}" required="true"
+						requiredMessage="#{bundle.CreateEventsRequiredMessage_reContactWay}" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{eventsController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditEventsRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{eventsController.selected.createdDate}"
+						title="#{bundle.EditEventsTitle_createdDate}" required="true" requiredMessage="#{bundle.EditEventsRequiredMessage_createdDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{eventsController.selected.modifiedDate}"
+						title="#{bundle.EditEventsTitle_modifiedDate}" required="true" requiredMessage="#{bundle.EditEventsRequiredMessage_modifiedDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.CreateEventsLabel_category}" for="category" />
+					<p:selectOneMenu id="category" value="#{eventsController.selected.category}" required="true"
+						requiredMessage="#{bundle.EditEventsRequiredMessage_category}">
+						<f:selectItems value="#{eventCategoriesController.itemsAvailableSelectOne}" var="categoryItem" itemValue="#{categoryItem}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:commandButton actionListener="#{eventsController.create}" value="#{bundle.Save}" update="display,:EventsListForm:datalist,:growl"
+					oncomplete="handleSubmit(args,'EventsCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="EventsCreateDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

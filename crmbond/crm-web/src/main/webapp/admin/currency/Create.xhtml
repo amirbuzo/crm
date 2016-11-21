@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="CurrencyCreateDlg" widgetVar="CurrencyCreateDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.CreateCurrencyTitle}">
+		<h:form id="CurrencyCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{currencyController.selected != null}">
+					<p:outputLabel value="#{bundle.CreateCurrencyLabel_code}" for="code" />
+					<p:inputText id="code" value="#{currencyController.selected.code}" title="#{bundle.CreateCurrencyTitle_code}" required="true"
+						requiredMessage="#{bundle.CreateCurrencyRequiredMessage_code}" />
+					<p:outputLabel value="#{bundle.CreateCurrencyLabel_description}" for="description" />
+					<p:inputText id="description" value="#{currencyController.selected.description}" title="#{bundle.CreateCurrencyTitle_description}"
+						required="true" requiredMessage="#{bundle.CreateCurrencyRequiredMessage_description}" />
+					<p:outputLabel value="#{bundle.CreateCurrencyLabel_userID}" for="userID" />
+					<p:inputText id="userID" value="#{currencyController.selected.userID}" title="#{bundle.CreateCurrencyTitle_userID}" required="true"
+						requiredMessage="#{bundle.CreateCurrencyRequiredMessage_userID}" />
+					<p:outputLabel value="#{bundle.CreateCurrencyLabel_isDefault}" for="isDefault" />
+					<p:inputText id="isDefault" value="#{currencyController.selected.isDefault}" title="#{bundle.CreateCurrencyTitle_isDefault}" required="true"
+						requiredMessage="#{bundle.CreateCurrencyRequiredMessage_isDefault}" />
+				</p:panelGrid>
+
+				<p:commandButton actionListener="#{currencyController.create}" value="#{bundle.Save}" update="display,:CurrencyListForm:datalist,:growl"
+					oncomplete="handleSubmit(args,'CurrencyCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="CurrencyCreateDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions" 
+	
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="InteractionServicesCreateDlg" widgetVar="InteractionServicesCreateDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.CreateInteractionServicesTitle}">
+		<h:form id="InteractionServicesCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{interactionServicesController.selected != null}">
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_place}" for="place" />
+					<p:selectOneMenu id="place" value="#{interactionServicesController.selected.place}" title="#{bundle.CreateInteractionServicesTitle_place}"
+						required="true" requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_place}">
+						<f:selectItem itemLabel="Select Place" itemValue="-1" noSelectionOption="true" />
+						<f:selectItems value="#{utils.place.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_clientContactID}" for="clientContactID" />
+
+					<p:autoComplete id="clientContactID" cache="true" cacheTimeout="30000" maxResults="10"
+						value="#{interactionServicesController.selected.clientContactID}" completeMethod="#{contactClientsController.completeTheme}"
+						var="clientContactIDItem" itemLabel="#{clientContactIDItem.getShortDescription()}" itemValue="#{clientContactIDItem}"
+						required="true" requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_clientContactID}"
+						converter="ContactClientsControllerConverter" forceSelection="true">
+						<!-- 					         <p:column> -->
+						<!-- 				                <h:outputText styleClass="ui-theme ui-theme-#{clientContactIDItem.getShortDescription()}" /> -->
+						<!-- 				            </p:column> -->
+
+						<p:column>
+							<h:outputText value="#{clientContactIDItem.getShortDescription()}" />
+						</p:column>
+					</p:autoComplete>
+
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_dateStarted}" for="dateStarted" />
+					<p:calendar id="dateStarted" pattern="MM/dd/yyyy HH:mm:ss" value="#{interactionServicesController.selected.dateStarted}"
+						title="#{bundle.EditInteractionServicesTitle_dateStarted}" required="true"
+						requiredMessage="#{bundle.EditInteractionServicesRequiredMessage_dateStarted}" showOn="button" >
+							<p:ajax event="dateSelect" listener="#{interactionServicesController.updatePeriod}" update=":InteractionServicesCreateForm:period"/>
+						</p:calendar>
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_dateFinished}" for="dateFinished" />
+					<p:calendar id="dateFinished" pattern="MM/dd/yyyy HH:mm:ss" value="#{interactionServicesController.selected.dateFinished}"
+						title="#{bundle.EditInteractionServicesTitle_dateFinished}" required="true"
+						requiredMessage="#{bundle.EditInteractionServicesRequiredMessage_dateFinished}" showOn="button" >
+							<p:ajax event="dateSelect" listener="#{interactionServicesController.updatePeriod}" update=":InteractionServicesCreateForm:period"/>
+						</p:calendar>
+					
+						<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_period}" for="period" />
+				<pe:inputNumber id="period" symbol=" #{bundle.Hour}" symbolPosition="s"  value="#{interactionServicesController.selected.period}" title="#{bundle.CreateInteractionServicesTitle_period}" required="true" requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_period}" />
+		
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_userDescription}" for="userDescription" />
+					<p:inputTextarea rows="4" cols="30" id="userDescription" value="#{interactionServicesController.selected.userDescription}"
+						title="#{bundle.CreateInteractionServicesTitle_userDescription}" required="true"
+						requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_userDescription}" />
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_status}" for="status" />
+					<p:selectOneMenu id="status" value="#{interactionServicesController.selected.status}" title="#{bundle.CreateInteractionServicesTitle_status}"
+						required="true" requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_status}">
+						<f:selectItem itemLabel="Select Status" itemValue="-1" noSelectionOption="true" />
+						<f:selectItems value="#{utils.interactionservicestatus.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_priority}" for="priority" />
+					<p:selectOneMenu id="priority" value="#{interactionServicesController.selected.priority}"
+						title="#{bundle.CreateInteractionServicesTitle_priority}" required="true"
+						requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_priority}">
+						<f:selectItems value="#{prioritiesController.itemsAvailableSelectOne}" var="categoryIDItem" itemValue="#{categoryIDItem}" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_contract}" for="contract" />
+					<p:selectBooleanCheckbox id="contract" value="#{interactionServicesController.selected.contract}" required="true"
+						requiredMessage="#{bundle.EditInteractionServicesRequiredMessage_contract}" />
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_price}" for="price" />
+					<pe:inputNumber id="price"  symbol=" #{userManager.userCurrency.code}" symbolPosition="s" value="#{interactionServicesController.selected.price}" title="#{bundle.CreateInteractionServicesTitle_price}"
+						required="true" requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_price}" />
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_otherCost}" for="otherCost" />
+					<p:inputText id="otherCost" value="#{interactionServicesController.selected.otherCost}"
+						title="#{bundle.CreateInteractionServicesTitle_otherCost}" required="true"
+						requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_otherCost}" />
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_currency}" for="currency" />
+					<p:selectOneMenu id="currency" value="#{interactionServicesController.selected.currency}"
+						title="#{bundle.CreateInteractionServicesTitle_currency}" required="true"
+						requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_currency}">
+					<f:selectItem itemLabel="#{userManager.userCurrency}" itemValue="#{userManager.userCurrency}" selected="true"/>
+						<f:selectItems value="#{currencyController.itemsAvailableSelectOne}" var="categoryIDItem" itemValue="#{categoryIDItem}" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_exchangeRate}" for="exchangeRate" />
+					<p:inputText id="exchangeRate" value="#{interactionServicesController.selected.exchangeRate}"
+						title="#{bundle.CreateInteractionServicesTitle_exchangeRate}" required="true"
+						requiredMessage="#{bundle.CreateInteractionServicesRequiredMessage_exchangeRate}" />
+							<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_categoryID}" for="categoryID" />
+					<p:selectOneMenu id="categoryID" value="#{interactionServicesController.selected.categoryID}" required="true"
+						requiredMessage="#{bundle.EditInteractionServicesRequiredMessage_categoryID}">
+						<f:selectItems value="#{interactionCategoriesController.itemsAvailableSelectOne}" var="categoryIDItem" itemValue="#{categoryIDItem}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{bundle.CreateInteractionServicesLabel_aimID}" for="aimID" />
+					<p:selectOneMenu id="aimID" value="#{interactionServicesController.selected.aimID}" required="true"
+						requiredMessage="#{bundle.EditInteractionServicesRequiredMessage_aimID}">
+						<f:selectItems value="#{aimsController.itemsAvailableSelectOne}" var="aimIDItem" itemValue="#{aimIDItem}" />
+					</p:selectOneMenu>
+					
+				</p:panelGrid>
+				<p:commandButton actionListener="#{interactionServicesController.create}" value="#{bundle.Save}"
+					update="display,:InteractionServicesListForm:datalist,:growl" oncomplete="handleSubmit(args,'InteractionServicesCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="InteractionServicesCreateDialog.hide()" immediate="true" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

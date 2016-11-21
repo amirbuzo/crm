@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="ContractTypesCreateDlg" widgetVar="ContractTypesCreateDialog" modal="false" resizable="false" appendTo="@(body)"
+		header="#{bundle.CreateContractTypesTitle}">
+		<h:form id="ContractTypesCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{contractTypesController.selected != null}">
+					<p:outputLabel value="#{bundle.CreateContractTypesLabel_description}" for="description" />
+					<p:inputText id="description" value="#{contractTypesController.selected.description}" title="#{bundle.CreateContractTypesTitle_description}"
+						required="true" requiredMessage="#{bundle.CreateContractTypesRequiredMessage_description}" />
+					<p:outputLabel value="#{bundle.CreateContractTypesLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{contractTypesController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditContractTypesRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.CreateContractTypesLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{contractTypesController.selected.createdDate}"
+						title="#{bundle.EditContractTypesTitle_createdDate}" required="true" requiredMessage="#{bundle.EditContractTypesRequiredMessage_createdDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.CreateContractTypesLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{contractTypesController.selected.modifiedDate}"
+						title="#{bundle.EditContractTypesTitle_modifiedDate}" required="true" requiredMessage="#{bundle.EditContractTypesRequiredMessage_modifiedDate}"
+						showOn="button" />
+				</p:panelGrid>
+				<p:commandButton actionListener="#{contractTypesController.create}" value="#{bundle.Save}" update="display,:ContractTypesListForm:datalist,:growl"
+					oncomplete="handleSubmit(args,'ContractTypesCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="ContractTypesCreateDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

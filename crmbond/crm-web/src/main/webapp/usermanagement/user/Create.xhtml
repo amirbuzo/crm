@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserTitle}">
+		<h:form id="UserCreateForm">
+			<p:tabView effect="fade" effectDuration="normal">
+
+				<p:tab title="User">
+
+					<h:panelGroup id="display">
+
+						<p:panelGrid columns="4" rendered="#{userController.selected != null}">
+							<p:outputLabel value="#{bundle.CreateUserLabel_name}" for="name" />
+							<p:inputText id="name" value="#{userController.selected.name}" title="#{bundle.CreateUserTitle_name}" required="true"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_name}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_surname}" for="surname" />
+							<p:inputText id="surname" value="#{userController.selected.surname}" title="#{bundle.CreateUserTitle_surname}" required="true"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_surname}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_userName}" for="userName" />
+							<p:inputText id="userName" value="#{userController.selected.userName}" title="#{bundle.CreateUserTitle_userName}" required="true"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_userName}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_userPass}" for="userPass" />
+							<p:inputText id="userPass" value="#{userController.selected.userPass}" title="#{bundle.CreateUserTitle_userPass}" required="true"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_userPass}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_address}" for="address" />
+							<p:inputText id="address" value="#{userController.selected.address}" title="#{bundle.CreateUserTitle_address}" required="true"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_address}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_phone}" for="phone" />
+							<p:inputText id="phone" value="#{userController.selected.phone}" title="#{bundle.CreateUserTitle_phone}"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_phone}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_mobile}" for="mobile" />
+							<p:inputText id="mobile" value="#{userController.selected.mobile}" title="#{bundle.CreateUserTitle_mobile}"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_mobile}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_type}" for="type" />
+							<p:inputText id="type" value="#{userController.selected.type}" title="#{bundle.CreateUserTitle_type}" required="true"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_type}" />
+							<p:outputLabel value="#{bundle.CreateUserLabel_userID}" for="userID" />
+							<p:inputText id="userID" value="#{userController.selected.userID}" title="#{bundle.CreateUserTitle_userID}" required="true"
+								requiredMessage="#{bundle.CreateUserRequiredMessage_userID}" />
+							<p:outputLabel value="#{bundle.email}" for="email" />
+							<p:inputText id="email" value="#{userController.selected.email}" required="true" />
+
+							<p:outputLabel value="Roles" for="advanced" />
+
+							<p:selectManyMenu id="advanced" collectionType="java.util.LinkedHashSet" value="#{userController.selected.roles}" converter="roleConverter"
+								var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+								<f:selectItems value="#{rolesController.itemsAvailableSelectMany}" var="role" itemLabel="#{role.description}" itemValue="#{role}" />
+
+								<p:column>
+									<h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
+								</p:column>
+
+								<p:column>
+									<h:outputText value="#{t.description}" />
+								</p:column>
+							</p:selectManyMenu>
+						</p:panelGrid>
+
+
+						<p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl"
+							oncomplete="handleSubmit(args,'UserCreateDialog');" />
+						<p:commandButton value="#{bundle.Cancel}" onclick="UserCreateDialog.hide()" />
+					</h:panelGroup>
+				</p:tab>
+				<p:tab title="Role Rights">
+					<p:dataTable value="#{userController.selected.userpermissions}" var="permission" paginator="true" rows="10" scrollHeight="400" scrollable="true"
+						liveScroll="true" resizableColumns="true" liveResize="true" draggableColumns="true" style="width: 600px" rowsPerPageTemplate="10,20,30,40,50">
+						<p:column headerText="Role">
+							<h:outputText value="#{permission.rightRefID.roleID.name}" />
+						</p:column>
+						<p:column headerText="Right">
+							<h:outputText value="#{permission.rightRefID.name}" />
+						</p:column>
+						<p:column headerText="Read">
+							<p:selectBooleanCheckbox value="#{permission.readRight}"></p:selectBooleanCheckbox>
+						</p:column>
+						<p:column headerText="Write">
+							<p:selectBooleanCheckbox value="#{permission.writeRight}"></p:selectBooleanCheckbox>
+						</p:column>
+						<p:column headerText="Excecute">
+							<p:selectBooleanCheckbox value="#{permission.executeRight}"></p:selectBooleanCheckbox>
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+
+	</p:dialog>
+
+</ui:composition>
+</html>

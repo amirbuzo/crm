@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="PotentialClientsViewDlg" widgetVar="PotentialClientsViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewPotentialClientsTitle}">
+		<h:form id="PotentialClientsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{potentialClientsController.selected != null}">
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_id}" />
+					<h:outputText value="#{potentialClientsController.selected.id}" title="#{bundle.ViewPotentialClientsTitle_id}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_name}" />
+					<h:outputText value="#{potentialClientsController.selected.name}" title="#{bundle.ViewPotentialClientsTitle_name}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_phone}" />
+					<h:outputText value="#{potentialClientsController.selected.phone}" title="#{bundle.ViewPotentialClientsTitle_phone}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_mobilePhone}" />
+					<h:outputText value="#{potentialClientsController.selected.mobilePhone}" title="#{bundle.ViewPotentialClientsTitle_mobilePhone}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_priority}" />
+					<h:outputText value="#{potentialClientsController.selected.priority}" title="#{bundle.ViewPotentialClientsTitle_priority}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_address}" />
+					<h:outputText value="#{potentialClientsController.selected.address}" title="#{bundle.ViewPotentialClientsTitle_address}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_email}" />
+					<h:outputText value="#{potentialClientsController.selected.email}" title="#{bundle.ViewPotentialClientsTitle_email}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_information}" />
+					<h:outputText value="#{potentialClientsController.selected.information}" title="#{bundle.ViewPotentialClientsTitle_information}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_status}" />
+					<h:outputText value="#{potentialClientsController.selected.status}" title="#{bundle.ViewPotentialClientsTitle_status}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_userCreated}" />
+					<h:outputText value="#{potentialClientsController.selected.userCreated}" title="#{bundle.ViewPotentialClientsTitle_userCreated}" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_isActive}" />
+					<p:selectBooleanCheckbox value="#{potentialClientsController.selected.isActive}" disabled="true" />
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_createdDate}" />
+					<h:outputText value="#{potentialClientsController.selected.createdDate}" title="#{bundle.ViewPotentialClientsTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewPotentialClientsLabel_modifiedDate}" />
+					<h:outputText value="#{potentialClientsController.selected.modifiedDate}" title="#{bundle.ViewPotentialClientsTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="PotentialClientsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

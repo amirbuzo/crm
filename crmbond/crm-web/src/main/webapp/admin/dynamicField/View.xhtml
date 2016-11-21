@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DynamicFieldViewDlg" widgetVar="DynamicFieldViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDynamicFieldTitle}">
+            <h:form id="DynamicFieldViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{dynamicFieldController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_id}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.id}" title="#{bundle.ViewDynamicFieldTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_createdDate}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.createdDate}" title="#{bundle.ViewDynamicFieldTitle_createdDate}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_isActive}"/>
+                        <p:selectBooleanCheckbox value="#{dynamicFieldController.selected.isActive}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_modifiedDate}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.modifiedDate}" title="#{bundle.ViewDynamicFieldTitle_modifiedDate}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_userCreated}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.userCreated}" title="#{bundle.ViewDynamicFieldTitle_userCreated}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_userModified}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.userModified}" title="#{bundle.ViewDynamicFieldTitle_userModified}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_fieldKey}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.fieldKey}" title="#{bundle.ViewDynamicFieldTitle_fieldKey}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_label}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.label}" title="#{bundle.ViewDynamicFieldTitle_label}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_length}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.length}" title="#{bundle.ViewDynamicFieldTitle_length}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_required}"/>
+                        <p:selectBooleanCheckbox value="#{dynamicFieldController.selected.required}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_requiredMessage}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.requiredMessage}" title="#{bundle.ViewDynamicFieldTitle_requiredMessage}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_type}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.type}" title="#{bundle.ViewDynamicFieldTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_version}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.version}" title="#{bundle.ViewDynamicFieldTitle_version}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_entityType}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.entityType}" title="#{bundle.ViewDynamicFieldTitle_entityType}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_mask}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.mask}" title="#{bundle.ViewDynamicFieldTitle_mask}"/>
+                        <h:outputText value="#{bundle.ViewDynamicFieldLabel_regex}"/>
+                        <h:outputText value="#{dynamicFieldController.selected.regex}" title="#{bundle.ViewDynamicFieldTitle_regex}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DynamicFieldViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

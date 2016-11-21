@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="ClientsViewDlg" widgetVar="ClientsViewDialog" maximizable="true" dynamic="true" minimizable="true" position="center" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewClientsTitle}">
+		<h:form id="ClientsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{clientsController.selected != null}">
+					<h:outputText value="#{bundle.ViewClientsLabel_id}" />
+					<h:outputText value="#{clientsController.selected.id}" title="#{bundle.ViewClientsTitle_id}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_clientName}" />
+					<h:outputText value="#{clientsController.selected.clientName}" title="#{bundle.ViewClientsTitle_clientName}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_legalStatus}" />
+					<h:outputText value="#{clientsController.selected.legalStatus}" title="#{bundle.ViewClientsTitle_legalStatus}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_phone}" />
+					<h:outputText value="#{clientsController.selected.phone}" title="#{bundle.ViewClientsTitle_phone}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_mobilePhone}" />
+					<h:outputText value="#{clientsController.selected.mobilePhone}" title="#{bundle.ViewClientsTitle_mobilePhone}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_administrator}" />
+					<h:outputText value="#{clientsController.selected.administrator}" title="#{bundle.ViewClientsTitle_administrator}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_nipt}" />
+					<h:outputText value="#{clientsController.selected.nipt}" title="#{bundle.ViewClientsTitle_nipt}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_otherInformation}" />
+					<h:outputText value="#{clientsController.selected.otherInformation}" title="#{bundle.ViewClientsTitle_otherInformation}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_clientSinceDate}" />
+					<h:outputText value="#{clientsController.selected.clientSinceDate}" title="#{bundle.ViewClientsTitle_clientSinceDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewClientsLabel_fax}" />
+					<h:outputText value="#{clientsController.selected.fax}" title="#{bundle.ViewClientsTitle_fax}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_address}" />
+					<h:outputText value="#{clientsController.selected.address}" title="#{bundle.ViewClientsTitle_address}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_email}" />
+					<h:outputText value="#{clientsController.selected.email}" title="#{bundle.ViewClientsTitle_email}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_website}" />
+					<h:outputText value="#{clientsController.selected.website}" title="#{bundle.ViewClientsTitle_website}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_city}" />
+					<h:outputText value="#{clientsController.selected.city}" title="#{bundle.ViewClientsTitle_city}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_numberOfEmployee}" />
+					<h:outputText value="#{clientsController.selected.numberOfEmployee}" title="#{bundle.ViewClientsTitle_numberOfEmployee}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_status}" />
+					<h:outputText value="#{clientsController.selected.status}" title="#{bundle.ViewClientsTitle_status}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_userIDAssistent}" />
+					<h:outputText value="#{clientsController.selected.userIDAssistent}" title="#{bundle.ViewClientsTitle_userIDAssistent}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_userModified}" />
+					<h:outputText value="#{clientsController.selected.userModified}" title="#{bundle.ViewClientsTitle_userModified}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_priority}" />
+					<h:outputText value="#{clientsController.selected.priority}" title="#{bundle.ViewClientsTitle_priority}" />
+					<h:outputText value="#{bundle.ViewClientsLabel_bussinessType}" />
+					<h:outputText value="#{clientsController.selected.bussinessType}" title="#{bundle.ViewClientsTitle_bussinessType}" />
+
+
+				</p:panelGrid>
+				<crm:generals item="#{clientsController.selected}" />
+				<p:commandButton value="#{bundle.Close}" onclick="ClientsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

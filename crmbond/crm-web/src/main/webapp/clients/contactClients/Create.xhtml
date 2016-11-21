@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="ContactClientsCreateDlg" widgetVar="ContactClientsCreateDialog" maximizable="true" dynamic="true" minimizable="true" position="center" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.CreateContactClientsTitle}">
+		<h:form id="ContactClientsCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{contactClientsController.selected != null}">
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_name}" for="name" />
+					<p:inputText id="name" value="#{contactClientsController.selected.name}" title="#{bundle.CreateContactClientsTitle_name}" required="true"
+						requiredMessage="#{bundle.CreateContactClientsRequiredMessage_name}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_surname}" for="surname" />
+					<p:inputText id="surname" value="#{contactClientsController.selected.surname}" title="#{bundle.CreateContactClientsTitle_surname}"
+						required="true" requiredMessage="#{bundle.CreateContactClientsRequiredMessage_surname}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_position}" for="position" />
+					<p:inputText id="position" value="#{contactClientsController.selected.position}" title="#{bundle.CreateContactClientsTitle_position}"
+						required="true" requiredMessage="#{bundle.CreateContactClientsRequiredMessage_position}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_departament}" for="departament" />
+					<p:inputText id="departament" value="#{contactClientsController.selected.departament}" title="#{bundle.CreateContactClientsTitle_departament}"
+						required="true" requiredMessage="#{bundle.CreateContactClientsRequiredMessage_departament}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_email}" for="email" />
+					<p:inputText id="email" value="#{contactClientsController.selected.email}" title="#{bundle.CreateContactClientsTitle_email}" required="true"
+						requiredMessage="#{bundle.CreateContactClientsRequiredMessage_email}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_officeAddress}" for="officeAddress" />
+					<p:inputText id="officeAddress" value="#{contactClientsController.selected.officeAddress}"
+						title="#{bundle.CreateContactClientsTitle_officeAddress}" required="true"
+						requiredMessage="#{bundle.CreateContactClientsRequiredMessage_officeAddress}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_information}" for="information" />
+					<p:inputTextarea rows="4" cols="30" id="information" value="#{contactClientsController.selected.information}"
+						title="#{bundle.CreateContactClientsTitle_information}" required="true"
+						requiredMessage="#{bundle.CreateContactClientsRequiredMessage_information}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_officeNumber}" for="officeNumber" />
+					<p:inputText id="officeNumber" value="#{contactClientsController.selected.officeNumber}" title="#{bundle.CreateContactClientsTitle_officeNumber}"
+						required="true" requiredMessage="#{bundle.CreateContactClientsRequiredMessage_officeNumber}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_mobilePhone}" for="mobilePhone" />
+					<p:inputText id="mobilePhone" value="#{contactClientsController.selected.mobilePhone}" title="#{bundle.CreateContactClientsTitle_mobilePhone}"
+						required="true" requiredMessage="#{bundle.CreateContactClientsRequiredMessage_mobilePhone}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_fax}" for="fax" />
+					<p:inputText id="fax" value="#{contactClientsController.selected.fax}" title="#{bundle.CreateContactClientsTitle_fax}" required="true"
+						requiredMessage="#{bundle.CreateContactClientsRequiredMessage_fax}" />
+					<p:outputLabel value="#{bundle.CreateContactClientsLabel_clientID}" for="clientID" />
+					<p:selectOneMenu id="clientID" value="#{contactClientsController.selected.clientID}" required="true"
+						requiredMessage="#{bundle.EditContactClientsRequiredMessage_clientID}">
+						<f:selectItems value="#{clientsController.itemsAvailableSelectOne}" var="clientIDItem" itemValue="#{clientIDItem}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:commandButton actionListener="#{contactClientsController.create}" value="#{bundle.Save}"
+					update="display,:ContactClientsListForm:datalist,:growl" oncomplete="handleSubmit(args,'ContactClientsCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="ContactClientsCreateDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

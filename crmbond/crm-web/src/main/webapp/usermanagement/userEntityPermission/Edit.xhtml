@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="UserEntityPermissionEditDlg" widgetVar="UserEntityPermissionEditDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.EditUserEntityPermissionTitle}">
+		<h:form id="UserEntityPermissionEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{userEntityPermissionController.selected != null}">
+					<p:outputLabel value="#{bundle.EditUserEntityPermissionLabel_userRefID}" for="userRefID" />
+					<p:inputText id="userRefID" value="#{userEntityPermissionController.selected.userRefID}"
+						title="#{bundle.EditUserEntityPermissionTitle_userRefID}" required="true"
+						requiredMessage="#{bundle.EditUserEntityPermissionRequiredMessage_userRefID}" />
+					<p:outputLabel value="#{bundle.EditUserEntityPermissionLabel_entityType}" for="entityType" />
+					<p:inputText id="entityType" value="#{userEntityPermissionController.selected.entityType}"
+						title="#{bundle.EditUserEntityPermissionTitle_entityType}" required="true"
+						requiredMessage="#{bundle.EditUserEntityPermissionRequiredMessage_entityType}" />
+					<p:outputLabel value="#{bundle.EditUserEntityPermissionLabel_entityID}" for="entityID" />
+					<p:inputText id="entityID" value="#{userEntityPermissionController.selected.entityID}" title="#{bundle.EditUserEntityPermissionTitle_entityID}"
+						required="true" requiredMessage="#{bundle.EditUserEntityPermissionRequiredMessage_entityID}" />
+					<p:outputLabel value="#{bundle.EditUserEntityPermissionLabel_userID}" for="userID" />
+					<p:inputText id="userID" value="#{userEntityPermissionController.selected.userID}" title="#{bundle.EditUserEntityPermissionTitle_userID}"
+						required="true" requiredMessage="#{bundle.EditUserEntityPermissionRequiredMessage_userID}" />
+					<p:outputLabel value="#{bundle.EditUserEntityPermissionLabel_CDate}" for="CDate" />
+					<p:calendar id="CDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{userEntityPermissionController.selected.createdDate}"
+						title="#{bundle.EditUserEntityPermissionTitle_CDate}" required="true" requiredMessage="#{bundle.EditUserEntityPermissionRequiredMessage_CDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.EditUserEntityPermissionLabel_lastUpdate}" for="lastUpdate" />
+					<p:calendar id="lastUpdate" pattern="MM/dd/yyyy HH:mm:ss" value="#{userEntityPermissionController.selected.modifiedDate}"
+						title="#{bundle.EditUserEntityPermissionTitle_lastUpdate}" required="true"
+						requiredMessage="#{bundle.EditUserEntityPermissionRequiredMessage_lastUpdate}" showOn="button" />
+				</p:panelGrid>
+				<p:commandButton actionListener="#{userEntityPermissionController.update}" value="#{bundle.Save}"
+					update="display,:UserEntityPermissionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEntityPermissionEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="UserEntityPermissionEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

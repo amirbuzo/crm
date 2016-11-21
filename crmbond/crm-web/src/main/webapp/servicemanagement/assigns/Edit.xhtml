@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="AssignsEditDlg" widgetVar="AssignsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAssignsTitle}">
+		<h:form id="AssignsEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{assignsController.selected != null}">
+					<p:outputLabel value="#{bundle.EditAssignsLabel_userID}" for="userID" />
+					<p:inputText id="userID" value="#{assignsController.selected.userID}" title="#{bundle.EditAssignsTitle_userID}" required="true"
+						requiredMessage="#{bundle.EditAssignsRequiredMessage_userID}" />
+					<p:outputLabel value="#{bundle.EditAssignsLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{assignsController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditAssignsRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.EditAssignsLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{assignsController.selected.createdDate}"
+						title="#{bundle.EditAssignsTitle_createdDate}" required="true" requiredMessage="#{bundle.EditAssignsRequiredMessage_createdDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.EditAssignsLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{assignsController.selected.modifiedDate}"
+						title="#{bundle.EditAssignsTitle_modifiedDate}" required="true" requiredMessage="#{bundle.EditAssignsRequiredMessage_modifiedDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.EditAssignsLabel_interactionID}" for="interactionID" />
+					<p:selectOneMenu id="interactionID" value="#{assignsController.selected.interactionID}" required="true"
+						requiredMessage="#{bundle.EditAssignsRequiredMessage_interactionID}">
+						<f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+						<f:selectItems value="#{interactionServicesController.itemsAvailableSelectOne}" var="interactionIDItem" itemValue="#{interactionIDItem}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:commandButton actionListener="#{assignsController.update}" value="#{bundle.Save}" update="display,:AssignsListForm:datalist,:growl"
+					oncomplete="handleSubmit(args, 'AssignsEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="AssignsEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

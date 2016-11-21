@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{myPreferenceController.locale}">
+
+	<h:head>
+		<title><ui:insert name="title">Default Title</ui:insert></title>
+		<h:outputStylesheet library="css" name="jsfcrud.css" />
+		<h:outputScript library="js" name="jsfcrud.js" />
+		<h:outputStylesheet library="primefaces-#{myPreferenceController.currentUser.theme}" name="theme.css" />
+		<title>#{bundle.AppName}</title>
+		<link rel="Shortcut Icon" type="image/png" href="#{resource['img:admin.png']}" />
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+		</f:facet>
+
+	</h:head>
+
+	<h:body>
+
+		<p:growl id="growl" life="3000" />
+
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" size="105" header="#{bundle.AppName}">
+				<ui:include src="/header.xhtml"></ui:include>
+				<ui:include src="/northmenu.xhtml"></ui:include>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="south" size="25">
+				<ui:include src="/footer.xhtml"></ui:include>
+			</p:layoutUnit>
+			<p:layoutUnit position="west" size="175" header="MENU" collapsible="true">
+				<h:form id="menuFormuser">
+					<p:menu>
+						<p:submenu label="Report">
+							<p:menuitem value="ClientAnalysis Report" outcome="/report/report.xhtml" />
+							<p:menuitem value="Bussiness Type Report" outcome="/report/bussinesstypechart.xhtml" />
+							<p:menuitem value="ClientContract" outcome="index" />
+							<p:menuitem value="ClientInteraction" outcome="index" />
+							<p:menuitem value="ClientPriority" outcome="index" />
+							<p:menuitem value="ClientRelation" outcome="index" />
+							<p:menuitem value="ClientStatus" outcome="/report/clientstatusreport.xhtml" />
+							<p:menuitem value="Contracts" outcome="/report/contractreport.xhtml" />
+							<p:menuitem value="ContractPreview" outcome="index" />
+							<p:menuitem value="ContractReport" outcome="/report/contractreportreport.xhtml" />
+							<p:menuitem value="FinishingContracts" outcome="index" />
+							<p:menuitem value="History" outcome="index" />
+							<p:menuitem value="InteractionService" outcome="index" />
+							<p:menuitem value="logs" outcome="/report/report.xhtml" />
+							<p:menuitem value="Request" outcome="index" />
+							<p:menuitem value="Service Aim" outcome="/report/serviceaimreport.xhtml" />
+							<p:menuitem value="Service Analysis" outcome="index" />
+							<p:menuitem value="Service Contract" outcome="index" />
+							<p:menuitem value="Service Type" outcome="index" />
+							<p:menuitem value="Un Contacted Client Report" outcome="index" />
+							<p:menuitem value="User Performance" outcome="index" />
+						</p:submenu>
+					</p:menu>
+				</h:form>
+
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+				<ui:insert name="body" />
+			</p:layoutUnit>
+
+		</p:layout>
+
+	</h:body>
+</f:view>
+</html>

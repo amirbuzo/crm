@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="Cache-Control" content="no-cache, no-store, max-age=0, must-revalidate" />
+	<meta name="Pragma" content="no-cache" />
+	<meta name="Expires" content="0" />
+	<meta name="X-Content-Type-Options" content="nosniff" />
+	<meta name="Expires" content="nosniff" />
+	<meta name="Strict-Transport-Security" content="max-age=31536000 ; includeSubDomains" />
+	<meta name="X-Frame-Options" content="DENY" />
+	<meta name="X-XSS-Protection" content="1; mode=block" />
+
+	<title><ui:insert name="title">Default Title</ui:insert></title>
+	<h:outputStylesheet library="css" name="jsfcrud.css" />
+	<h:outputScript library="js" name="jsfcrud.js" />
+
+	<!-- 		<f:facet name="first"> -->
+
+	<!-- 		</f:facet> -->
+
+
+
+</h:head>
+
+<h:body>
+
+	<p:growl id="growl" life="3000" />
+
+	<p:layout fullPage="true">
+		<p:layoutUnit  position="north" size="70" resizable="false" closable="false" collapsible="false" header="#{bundle.AppName}">
+			<ui:include src="header.xhtml"></ui:include>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" size="25">
+			<ui:include src="footer.xhtml"></ui:include>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<ui:insert name="body" />
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+</html>

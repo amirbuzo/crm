@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="AssignsViewDlg" widgetVar="AssignsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAssignsTitle}">
+		<h:form id="AssignsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{assignsController.selected != null}">
+					<h:outputText value="#{bundle.ViewAssignsLabel_id}" />
+					<h:outputText value="#{assignsController.selected.id}" title="#{bundle.ViewAssignsTitle_id}" />
+					<h:outputText value="#{bundle.ViewAssignsLabel_userID}" />
+					<h:outputText value="#{assignsController.selected.userID}" title="#{bundle.ViewAssignsTitle_userID}" />
+					<h:outputText value="#{bundle.ViewAssignsLabel_isActive}" />
+					<p:selectBooleanCheckbox value="#{assignsController.selected.isActive}" disabled="true" />
+					<h:outputText value="#{bundle.ViewAssignsLabel_createdDate}" />
+					<h:outputText value="#{assignsController.selected.createdDate}" title="#{bundle.ViewAssignsTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewAssignsLabel_modifiedDate}" />
+					<h:outputText value="#{assignsController.selected.modifiedDate}" title="#{bundle.ViewAssignsTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewAssignsLabel_interactionID}" />
+					<h:outputText value="#{assignsController.selected.interactionID}" title="#{bundle.ViewAssignsTitle_interactionID}" />
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="AssignsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

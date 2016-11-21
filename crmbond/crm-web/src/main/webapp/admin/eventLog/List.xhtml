@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/admin/template.xhtml">
+
+ 
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEventLogTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="EventLogListForm">
+                <p:panel header="#{bundle.ListEventLogTitle}">
+                    <p:dataTable id="datalist" value="#{eventLogController.items}" var="item"
+                                 selectionMode="single" selection="#{eventLogController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_logTimestamp}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.logTimestamp}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_logLevel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.logLevel}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_threadName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.threadName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_className}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.className}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_logMessage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.logMessage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exFull}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exFull}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exShort}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exShort}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exClassName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exClassName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exFileName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exFileName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exLineNumber}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exLineNumber}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exMethodName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exMethodName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exMessage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exMessage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_exLocalizedMessage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.exLocalizedMessage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_userId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_username}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.username}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_objecttype}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.objecttype}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_action}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.action}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_appid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.appid}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_usersession}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usersession}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_event}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.event}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_objectid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.objectid}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_moduleid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.moduleid}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEventLogTitle_resultid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resultid}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{eventLogController.prepareCreate}" update=":EventLogCreateForm" oncomplete="PF('EventLogCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EventLogViewForm" oncomplete="PF('EventLogViewDialog').show()" disabled="#{empty eventLogController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EventLogEditForm" oncomplete="PF('EventLogEditDialog').show()" disabled="#{empty eventLogController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{eventLogController.destroy}" update=":growl,datalist" disabled="#{empty eventLogController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

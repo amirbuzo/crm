@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Dashboard"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+
+
+
+
+		<div align="center" style="height: 400px">
+			<h:form>
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:dashboard id="board" model="#{dashboardView.model}">
+					<p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
+
+					<p:panel id="service" header="Service Maintenance" toggleable="true" style="width:300px;height:200px;">
+						<h:outputText value="Sports Content" />
+						<br />
+						<h:link outcome="/servicemanagement/interactionServices/List" value="InteractionServices" />
+						<br />
+						<h:link outcome="/servicemanagement/assigns/List" value="Assigns" />
+						<br />
+
+						<h:link outcome="/servicemanagement/requests/List" value="Requests" />
+						<br />
+
+					</p:panel>
+					<p:panel id="admin" header="admin" toggleable="true" style="width:300px;height:200px;">
+						<h:outputText value="admin content" />
+						<br />
+						<h:link outcome="/admin/states/List" value="States" />
+						<br />
+						<h:link outcome="/admin/priorities/List" value="Priorities" />
+						<br />
+						<h:link outcome="/servicemanagement/interactionCategories/List" value="InteractionCategories" />
+						<br />
+						<h:link outcome="/admin/email/List" value="Email" />
+						<br />
+						<h:link outcome="/marketing/references/List" value="References" />
+						<br />
+
+						<h:link outcome="/admin/aims/List" value="Aims" />
+						<br />
+						<br />
+						<h:link outcome="/admin/cities/List" value="Cities" />
+
+						<h:link outcome="/admin/bussinessTypes/List" value="BussinessTypes" />
+						<br />
+						<h:link outcome="/admin/claims/List" value="Claims" />
+						<br />
+
+						<h:link outcome="/admin/currency/List" value="Currency" />
+						<br />
+
+						<h:link outcome="/admin/interactionServiceTypes/List" value="InteractionServiceTypes" />
+						<br />
+
+
+
+					</p:panel>
+
+					<p:panel id="userpreference" header="#{userManager.currentUser.name}" toggleable="true" style="width:300px;height:200px;">
+						<h:outputText value="user preference" />
+						<br />
+						<h:link outcome="/user/profile" value="Profile" />
+						<br />
+						<h:link outcome="/user/mypreferences" value="Preferences" />
+						<br />
+						<h:link outcome="/user/changepassword" value="Change Password" />
+						<br />
+						<h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+						<br />
+					</p:panel>
+
+					<p:panel id="marketing" header="Marketing" toggleable="true" style="width:300px;height:200px;">
+						<h:link outcome="/marketing/potentialClients/List" value="PotentialClients" />
+						<br />
+						<h:link outcome="/marketing/potentialContactCategories/List" value="PotentialContactCategories" />
+						<br />
+						<h:link outcome="/marketing/potentialContacts/List" value="PotentialContacts" />
+						<h:link outcome="/marketing/events/List" value="Events" />
+
+						<h:link outcome="/marketing/eventCategories/List" value="EventCategories" />
+						<br />
+					</p:panel>
+
+					<p:panel id="clients" header="Clients" toggleable="true" style="width:300px;height:200px;">
+						<h:link outcome="/clients/company/List" value="Company" />
+						<br />
+						<h:link outcome="/clients/clients/List.xhtml" value="Clients" />
+						<br />
+						<h:link outcome="/clients/contactClients/List.xhtml" value="ContactClients" />
+						<br />
+						<br />
+						<h:link outcome="/clients/contactClients/List.xhtml" value="ContactClients" />
+						<br />
+					</p:panel>
+
+					<p:panel id="contract" header="Contracts" toggleable="true" style="width:300px;height:200px;">
+						<h:outputText value="Contract" />
+						<h:link outcome="/contracts/contracts/List" value="Contracts" />
+						<h:link outcome="/contracts/contractTypes/List" value="ContractTypes" />
+						<br />
+					</p:panel>
+					<p:panel id="logs" header="Logs" toggleable="true" style="width:300px;height:200px;">
+						<h:outputText value="Logs" />
+						<h:link outcome="/servicemanagement/logs/List" value="Logs" />
+					</p:panel>
+					<p:panel id="tasks" header="Tasks" toggleable="true" style="width:300px;height:200px;">
+						<h:outputText value="Tasks" />
+						<h:link outcome="/user/assigns/List" value="Logs" />
+					</p:panel>
+
+					<p:panel id="reports" header="Reports" toggleable="true" style="width:300px;height:200px;">
+						<h:outputText value="reports" />
+						<h:link outcome="/servicemanagement/logs/List" value="Logs" />
+					</p:panel>
+
+					<p:panel id="users" header="User Management" toggleable="true" style="width:300px;height:200px;">
+						<h:link outcome="/usermanagement/user/List" value=" Users" />
+						<br />
+						<h:link outcome="/usermanagement/userEntityPermission/List" value="UserEntityPermission" />
+						<br />
+						<h:link outcome="/usermanagement/userRights/List" value="UserRights" />
+						<br />
+						<h:link outcome="/usermanagement/roles/List" value="Roles" />
+					</p:panel>
+
+
+
+				</p:dashboard>
+
+
+				<div style="clear: both" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>
+
+

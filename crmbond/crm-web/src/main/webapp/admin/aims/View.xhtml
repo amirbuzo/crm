@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="AimsViewDlg" widgetVar="AimsViewDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.ViewAimsTitle}"
+		maximizable="true">
+		<h:form id="AimsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{aimsController.selected != null}">
+
+					<h:outputText value="#{bundle.ViewAimsLabel_aimDescription}" />
+					<h:outputText value="#{aimsController.selected.aimDescription}" title="#{bundle.ViewAimsTitle_aimDescription}" />
+
+				</p:panelGrid>
+				<crm:generals item="#{aimsController.selected}" />
+
+
+				<p:dataTable id="fieldlist" styleClass="fixed-size" value="#{aimsController.selected.attributes.keySet()}" var="var">
+					<f:facet name="header">
+						<p:outputLabel value="#{bundle.dynamcifield}" />
+					</f:facet>
+					<p:column headerText="#{bundle.fieldname}">
+						<p:outputLabel value="#{var}" />
+					</p:column>
+					<p:column headerText="#{bundle.fieldvalue}">
+						<p:outputLabel value="#{aimsController.selected.attributes[var]}" />
+					</p:column>
+				</p:dataTable>
+
+
+				<p:commandButton value="#{bundle.Close}" onclick="AimsViewDialog.hide()" />
+
+			</h:panelGroup>
+
+
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

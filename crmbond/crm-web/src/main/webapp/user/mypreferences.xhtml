@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/user/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Preferences"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="Profile">
+			<p:panelGrid columns="2" rendered="#{myPreferenceController.currentUser != null}">
+
+
+				<p:outputLabel value="Language" for="language" />
+				<p:selectOneMenu id="language" value="#{myPreferenceController.currentUser.language}">
+					<f:selectItem itemLabel="Shqip" itemValue="sq" />
+					<f:selectItem itemLabel="English" itemValue="en" />
+				</p:selectOneMenu>
+
+
+
+
+				<p:outputLabel value="Theme" for="advanced" />
+
+				<p:themeSwitcher id="advanced" var="t" value="#{myPreferenceController.currentUser.theme}">
+					<f:selectItem itemLabel="Choose Theme" itemValue="" />
+					<f:selectItem itemLabel="afterdark" itemValue="afterdark" />
+					<f:selectItem itemLabel="afternoon" itemValue="afternoon" />
+					<f:selectItem itemLabel="afterwork" itemValue="afterwork" />
+					<f:selectItem itemLabel="aristo" itemValue="aristo" />
+					<f:selectItem itemLabel="black-tie" itemValue="black-tie" />
+					<f:selectItem itemLabel="blitzer" itemValue="blitzer" />
+					<f:selectItem itemLabel="bluesky" itemValue="bluesky" />
+					<f:selectItem itemLabel="bootstrap" itemValue="bootstrap" />
+					<f:selectItem itemLabel="casablanca" itemValue="casablanca" />
+					<f:selectItem itemLabel="cruze" itemValue="cruze" />
+					<f:selectItem itemLabel="cupertino" itemValue="cupertino" />
+					<f:selectItem itemLabel="dark-hive" itemValue="dark-hive" />
+					<f:selectItem itemLabel="delta" itemValue="delta" />
+					<f:selectItem itemLabel="dot-luv" itemValue="dot-luv" />
+					<f:selectItem itemLabel="eggplant" itemValue="eggplant" />
+					<f:selectItem itemLabel="excite-bike" itemValue="excite-bike" />
+					<f:selectItem itemLabel="flick" itemValue="flick" />
+					<f:selectItem itemLabel="glass-x" itemValue="glass-x" />
+					<f:selectItem itemLabel="home" itemValue="home" />
+					<f:selectItem itemLabel="hot-sneaks" itemValue="hot-sneaks" />
+					<f:selectItem itemLabel="humanity" itemValue="humanity" />
+					<f:selectItem itemLabel="le-frog" itemValue="le-frog" />
+					<f:selectItem itemLabel="midnight" itemValue="midnight" />
+					<f:selectItem itemLabel="mint-choc" itemValue="mint-choc" />
+					<f:selectItem itemLabel="omega" itemValue="omega" />
+					<f:selectItem itemLabel="midnight" itemValue="midnight" />
+					<f:selectItem itemLabel="overcast" itemValue="overcast" />
+					<f:selectItem itemLabel="redmond" itemValue="redmond" />
+					<f:selectItem itemLabel="pepper-grinder" itemValue="pepper-grinder" />
+					<f:selectItem itemLabel="rocket" itemValue="rocket" />
+					<f:selectItem itemLabel="sam" itemValue="sam" />
+					<f:selectItem itemLabel="smoothness" itemValue="smoothness" />
+					<f:selectItem itemLabel="south-street" itemValue="south-street" />
+					<f:selectItem itemLabel="start" itemValue="start" />
+					<f:selectItem itemLabel="sunny" itemValue="sunny" />
+					<f:selectItem itemLabel="swanky-purse" itemValue="swanky-purse" />
+					<f:selectItem itemLabel="trontastic" itemValue="trontastic" />
+					<f:selectItem itemLabel="ui-darkness" itemValue="ui-darkness" />
+					<f:selectItem itemLabel="ui-lightness" itemValue="ui-lightness" />
+					<f:selectItem itemLabel="vader" itemValue="vader" />
+
+
+
+					<p:column>
+						<h:outputText styleClass="ui-theme ui-theme-" style="display-block" />
+					</p:column>
+
+					<p:column>
+
+					</p:column>
+				</p:themeSwitcher>
+
+				<p:outputLabel value="Preferred Currency" for="currency" />
+				<p:selectOneMenu id="currency" value="#{myPreferenceController.currentUser.currency}">
+					<f:selectItem itemLabel="LEK" itemValue="7" />
+					<f:selectItem itemLabel="GPB" itemValue="8" />
+					<f:selectItem itemLabel="EUR" itemValue="9" />
+					<f:selectItem itemLabel="USD" itemValue="10" />
+					<f:selectItem itemLabel="CHR" itemValue="11" />
+
+				</p:selectOneMenu>
+
+				<p:outputLabel value="#{bundle.dateformat}" for="datef" />
+				<p:selectOneMenu id="datef" value="#{myPreferenceController.currentUser.dateformat}">
+					<f:selectItem itemLabel="MM/dd/yyyy hh:mm:ss" itemValue="MM/dd/yyyy hh:mm:ss" />
+					<f:selectItem itemLabel="MM/dd/yyyy hh:mm a" itemValue="MM/dd/yyyy hh:mm a" />
+					<f:selectItem itemLabel="MM/dd/yyyy" itemValue="MM/dd/yyyy" />
+					<f:selectItem itemLabel="dd-MM-yyyy" itemValue="dd-MM-yyyy" />
+					<f:selectItem itemLabel="yyyy-MM-dd" itemValue="yyyy-MM-dd" />
+					<f:selectItem itemLabel="yyyyy.MMMMM.dd GGG hh:mm aaa" itemValue="yyyyy.MMMMM.dd GGG hh:mm aaa" />
+					<f:selectItem itemLabel="EEE, d MMM yyyy HH:mm:ss" itemValue="dd-MM-yyyy" />
+					<f:selectItem itemLabel="dd MMMMM yyyy" itemValue="dd MMMMM yyyy" />
+					<f:selectItem itemLabel="dd.MM.yy" itemValue="dd.MM.yy" />
+					<f:selectItem itemLabel="yyyy.MM.dd G 'at' hh:mm:ss z" itemValue="yyyy.MM.dd G 'at' hh:mm:ss z" />
+					<f:selectItem itemLabel="yyyyy.MMMMM.dd GGG hh:mm" itemValue="yyyyy.MMMMM.dd GGG hh:mm" />
+
+				</p:selectOneMenu>
+
+			</p:panelGrid>
+			<p:commandButton action="#{myPreferenceController.update}" value="#{bundle.Save}" update="@all" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
+
+
+

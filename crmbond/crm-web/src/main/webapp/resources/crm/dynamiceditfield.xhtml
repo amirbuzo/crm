@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:h="http://xmlns.jcp.org/jsf/html" 
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:pe="http://primefaces.org/ui/extensions" 
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<composite:interface>
+	<composite:attribute name="values" required="true" />
+	<composite:attribute name="dynamicfields" required="true" />	
+	<composite:attribute name="style" required="false" />
+</composite:interface>
+<composite:implementation>
+	<p:panelGrid columns="2">
+
+		<c:forEach items="#{cc.attrs.dynamicfields.keySet()}" var="name">
+			<c:if test="#{name == null}">
+			
+			</c:if>
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'TEXT'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:inputText id="#{name}" value="#{cc.attrs.values[name]}" rendered="#{cc.attrs.dynamicfields[name].type == 'TEXT'}"
+					required="#{cc.attrs.dynamicfields[name].required}" />
+			</c:if>
+
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'SECRET'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<h:inputSecret id="#{name}" value="#{cc.attrs.values[name]}" rendered="#{cc.attrs.dynamicfields[name].type  == 'SECRET'}"
+					required="#{cc.attrs.dynamicfields[name].required}" />
+			</c:if>
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'TEXTAREA'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:inputTextarea id="#{name}" value="#{cc.attrs.values[name]}" rendered="#{cc.attrs.dynamicfields[name].type  == 'TEXTAREA'}" required="#{cc.attrs.dynamicfields[name].required}" />
+			</c:if>
+
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'RADIO'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:selectOneRadio id="#{name}" value="#{cc.attrs.values[name]}"
+				 required="#{cc.attrs.dynamicfields[name].required}" >
+					<f:selectItems value="#{cc.attrs.dynamicfields[name].attributes.entrySet()}" var="entry" 
+    					itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+				</p:selectOneRadio>
+			</c:if>
+
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'SELECTONE'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:selectOneMenu id="#{name}" value="#{cc.attrs.values[name]}"  required="#{cc.attrs.dynamicfields[name].required}" >
+				<f:selectItems value="#{cc.attrs.dynamicfields[name].attributes.entrySet()}" var="entry" 
+    					itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+				</p:selectOneMenu>
+			</c:if>
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'CHECKONE'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:selectBooleanCheckbox id="#{name}" value="#{cc.attrs.values[name]}" required="#{cc.attrs.dynamicfields[name].required}" 
+					 />
+			</c:if>
+
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'NUMBER'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:inputMask id="#{name}" value="#{cc.attrs.values[name]}" required="#{cc.attrs.dynamicfields[name].required}"  >
+					  <pe:keyFilter regEx="/[0-9_]/i" />
+					</p:inputMask>
+			</c:if>
+
+
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'DOUBLE'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:inputText id="#{name}" value="#{cc.attrs.values[name]}" required="#{cc.attrs.dynamicfields[name].required}" 
+					 >
+					  <f:convertNumber minFractionDigits="2" />
+					 </p:inputText>
+			</c:if>
+
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'MASK'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:inputMask id="#{name}" value="#{cc.attrs.values[name]}" mask="99-9999999" required="#{cc.attrs.dynamicfields[name].required}" 
+					rendered="#{cc.attrs.dynamicfields[name].type  == 'MASK'}" />
+			</c:if>
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'DATE'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:calendar id="#{name}" value="#{cc.attrs.values[name]}" pattern="MM/dd/yyyy"  required="#{cc.attrs.dynamicfields[name].required}" 
+					rendered="#{cc.attrs.dynamicfields[name].type  == 'DATE'}"> 
+					<f:convertDateTime type="date"  dateStyle="short" pattern="MM/dd/yyyy" />
+				</p:calendar>
+			</c:if>
+			<c:if test="#{cc.attrs.dynamicfields[name].type == 'DATETIME'}">
+				<p:outputLabel for="#{name}" value="#{cc.attrs.dynamicfields[name].label}" />
+				<p:calendar id="#{name}" value="#{cc.attrs.values[name]}" pattern="MM/dd/yyyy hh:mm"  required="#{cc.attrs.dynamicfields[name].required}" 
+					rendered="#{cc.attrs.dynamicfields[name].type  == 'DATETIME'}">
+					<f:convertDateTime pattern="MM/dd/yyyy hh:mm" />
+				</p:calendar>
+			</c:if>
+		</c:forEach>
+	</p:panelGrid>
+</composite:implementation>
+</html>

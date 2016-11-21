@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="value" required="true" />
+	<composite:attribute name="toggleable" required="true" />
+	<composite:attribute name="closable" />
+	<composite:attribute name="toggleSpeed" />
+	<composite:attribute name="collapsed" />
+</composite:interface>
+
+<composite:implementation>
+	<p:panel id="#{cc.attrs.value.id}" header="#{cc.attrs.value.title}" toggleable="#{cc.attrs.toggleable}" closable="#{cc.attrs.closable}"
+		toggleSpeed="#{cc.attrs.toggleSpeed}" collapsed="#{cc.attrs.collapsed}">
+		<composite:insertChildren />
+	</p:panel>
+</composite:implementation>
+</html>

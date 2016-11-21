@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/marketing/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListEventsTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="EventsListForm">
+			<p:panel header="#{bundle.ListEventsTitle}">
+				<p:contextMenu for="datalist">
+					<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{eventsController.prepareCreate}"
+						update=":EventsCreateForm" oncomplete="PF('EventsCreateDialog').show()" />
+					<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventsViewForm" oncomplete="PF('EventsViewDialog').show()" />
+					<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EventsEditForm" oncomplete="PF('EventsEditDialog').show()" />
+					<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{eventsController.destroy}" update=":growl,datalist" />
+
+				</p:contextMenu>
+				<p:dataTable id="datalist" value="#{eventsController.items}" var="item" selectionMode="single" selection="#{eventsController.selected}"
+					paginator="true" rowKey="#{item.id}" rows="10" rowsPerPageTemplate="10,20,30,40,50">
+
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_contactID}" />
+						</f:facet>
+						<h:outputText value="#{item.contactID}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_contactWay}" />
+						</f:facet>
+						<h:outputText value="#{item.contactWay}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_contactDate}" />
+						</f:facet>
+						<h:outputText value="#{item.contactDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_userCreated}" />
+						</f:facet>
+						<h:outputText value="#{item.userCreated}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_information}" />
+						</f:facet>
+						<h:outputText value="#{item.information}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_reContact}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.reContact}" disabled="true" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_reContactDate}" />
+						</f:facet>
+						<h:outputText value="#{item.reContactDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_reContactWay}" />
+						</f:facet>
+						<h:outputText value="#{item.reContactWay}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_isActive}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.isActive}" disabled="true" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_createdDate}" />
+						</f:facet>
+						<h:outputText value="#{item.createdDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_modifiedDate}" />
+						</f:facet>
+						<h:outputText value="#{item.modifiedDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListEventsTitle_category}" />
+						</f:facet>
+						<h:outputText value="#{item.category}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{eventsController.prepareCreate}"
+							update=":EventsCreateForm" oncomplete="PF('EventsCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventsViewForm"
+							oncomplete="PF('EventsViewDialog').show()" disabled="#{empty eventsController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EventsEditForm"
+							oncomplete="PF('EventsEditDialog').show()" disabled="#{empty eventsController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{eventsController.destroy}"
+							update=":growl,datalist" disabled="#{empty eventsController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

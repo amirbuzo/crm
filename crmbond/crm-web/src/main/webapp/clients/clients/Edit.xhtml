@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+	<!-- 			 		                        <p:inputText id="legalStatus" value="#{clientsController.selected.legalStatus}" title="#{bundle.EditClientsTitle_legalStatus}" required="true" requiredMessage="#{bundle.EditClientsRequiredMessage_legalStatus}"/> -->
+
+	<p:dialog id="ClientsEditDlg" widgetVar="ClientsEditDialog" maximizable="true" dynamic="true" minimizable="true" position="center" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClientsTitle}">
+		<h:form id="ClientsEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{clientsController.selected != null}">
+					<p:outputLabel value="#{bundle.EditClientsLabel_clientName}" for="clientName" />
+					<p:inputText id="clientName" value="#{clientsController.selected.clientName}" title="#{bundle.EditClientsTitle_clientName}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_clientName}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_legalStatus}" for="legalStatus" />
+					<p:selectOneMenu id="legalStatus" value="#{clientsController.selected.legalStatus}" title="#{bundle.EditClientsTitle_legalStatus}"
+						required="true" requiredMessage="#{bundle.EditClientsRequiredMessage_legalStatus}">
+						<f:selectItem itemLabel="Select Status" itemValue="-1" noSelectionOption="true" />
+						<f:selectItems value="#{utils.clientstatusmap.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="#{bundle.EditClientsLabel_phone}" for="phone" />
+					<p:inputText id="phone" value="#{clientsController.selected.phone}" title="#{bundle.EditClientsTitle_phone}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_phone}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_mobilePhone}" for="mobilePhone" />
+					<p:inputText id="mobilePhone" value="#{clientsController.selected.mobilePhone}" title="#{bundle.EditClientsTitle_mobilePhone}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_mobilePhone}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_administrator}" for="administrator" />
+					<p:inputText id="administrator" value="#{clientsController.selected.administrator}" title="#{bundle.EditClientsTitle_administrator}"
+						required="true" requiredMessage="#{bundle.EditClientsRequiredMessage_administrator}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_nipt}" for="nipt" />
+					<p:inputText id="nipt" value="#{clientsController.selected.nipt}" title="#{bundle.EditClientsTitle_nipt}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_nipt}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_otherInformation}" for="otherInformation" />
+					<p:inputTextarea rows="4" cols="30" id="otherInformation" value="#{clientsController.selected.otherInformation}"
+						title="#{bundle.EditClientsTitle_otherInformation}" required="true" requiredMessage="#{bundle.EditClientsRequiredMessage_otherInformation}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_clientSinceDate}" for="clientSinceDate" />
+					<p:calendar id="clientSinceDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientsController.selected.clientSinceDate}"
+						title="#{bundle.EditClientsTitle_clientSinceDate}" required="true" requiredMessage="#{bundle.EditClientsRequiredMessage_clientSinceDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_fax}" for="fax" />
+					<p:inputText id="fax" value="#{clientsController.selected.fax}" title="#{bundle.EditClientsTitle_fax}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_fax}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_address}" for="address" />
+					<p:inputText id="address" value="#{clientsController.selected.address}" title="#{bundle.EditClientsTitle_address}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_address}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_email}" for="email" />
+					<p:inputText id="email" value="#{clientsController.selected.email}" title="#{bundle.EditClientsTitle_email}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_email}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_website}" for="website" />
+					<p:inputText id="website" value="#{clientsController.selected.website}" title="#{bundle.EditClientsTitle_website}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_website}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_city}" for="city" />
+					<p:inputText id="city" value="#{clientsController.selected.city}" title="#{bundle.EditClientsTitle_city}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_city}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_numberOfEmployee}" for="numberOfEmployee" />
+					<p:inputText id="numberOfEmployee" value="#{clientsController.selected.numberOfEmployee}" title="#{bundle.EditClientsTitle_numberOfEmployee}"
+						required="true" requiredMessage="#{bundle.EditClientsRequiredMessage_numberOfEmployee}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_status}" for="status" />
+					<p:inputText id="status" value="#{clientsController.selected.status}" title="#{bundle.EditClientsTitle_status}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_status}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_userIDAssistent}" for="userIDAssistent" />
+					<p:inputText id="userIDAssistent" value="#{clientsController.selected.userIDAssistent}" title="#{bundle.EditClientsTitle_userIDAssistent}"
+						required="true" requiredMessage="#{bundle.EditClientsRequiredMessage_userIDAssistent}" />
+					<p:outputLabel value="#{bundle.EditClientsLabel_priority}" for="priority" />
+					<p:selectOneMenu id="priority" value="#{clientsController.selected.priority}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_priority}">
+						<f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+						<f:selectItems value="#{prioritiesController.itemsAvailableSelectOne}" var="priorityItem" itemValue="#{priorityItem}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="#{bundle.EditClientsLabel_bussinessType}" for="bussinessType" />
+					<p:selectOneMenu id="bussinessType" value="#{clientsController.selected.bussinessType}" required="true"
+						requiredMessage="#{bundle.EditClientsRequiredMessage_bussinessType}">
+						<f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+						<f:selectItems value="#{bussinessTypesController.itemsAvailableSelectOne}" var="bussinessTypeItem" itemValue="#{bussinessTypeItem}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<crm:generals item="#{clientsController.selected}" />
+
+				<p:commandButton actionListener="#{clientsController.update}" value="#{bundle.Save}" update="display,:ClientsListForm:datalist,:growl"
+					oncomplete="handleSubmit(args, 'ClientsEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="ClientsEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

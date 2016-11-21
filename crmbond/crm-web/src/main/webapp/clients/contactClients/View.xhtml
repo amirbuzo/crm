@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="ContactClientsViewDlg" widgetVar="ContactClientsViewDialog" maximizable="true" dynamic="true" minimizable="true" position="center" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewContactClientsTitle}">
+		<h:form id="ContactClientsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{contactClientsController.selected != null}">
+					<h:outputText value="#{bundle.ViewContactClientsLabel_id}" />
+					<h:outputText value="#{contactClientsController.selected.id}" title="#{bundle.ViewContactClientsTitle_id}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_name}" />
+					<h:outputText value="#{contactClientsController.selected.name}" title="#{bundle.ViewContactClientsTitle_name}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_surname}" />
+					<h:outputText value="#{contactClientsController.selected.surname}" title="#{bundle.ViewContactClientsTitle_surname}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_position}" />
+					<h:outputText value="#{contactClientsController.selected.position}" title="#{bundle.ViewContactClientsTitle_position}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_departament}" />
+					<h:outputText value="#{contactClientsController.selected.departament}" title="#{bundle.ViewContactClientsTitle_departament}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_email}" />
+					<h:outputText value="#{contactClientsController.selected.email}" title="#{bundle.ViewContactClientsTitle_email}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_officeAddress}" />
+					<h:outputText value="#{contactClientsController.selected.officeAddress}" title="#{bundle.ViewContactClientsTitle_officeAddress}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_information}" />
+					<h:outputText value="#{contactClientsController.selected.information}" title="#{bundle.ViewContactClientsTitle_information}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_officeNumber}" />
+					<h:outputText value="#{contactClientsController.selected.officeNumber}" title="#{bundle.ViewContactClientsTitle_officeNumber}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_mobilePhone}" />
+					<h:outputText value="#{contactClientsController.selected.mobilePhone}" title="#{bundle.ViewContactClientsTitle_mobilePhone}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_fax}" />
+					<h:outputText value="#{contactClientsController.selected.fax}" title="#{bundle.ViewContactClientsTitle_fax}" />
+					<h:outputText value="#{bundle.ViewContactClientsLabel_userModified}" />
+					<h:outputText value="#{contactClientsController.selected.userModified}" title="#{bundle.ViewContactClientsTitle_userModified}" />
+
+					<h:outputText value="#{bundle.ViewContactClientsLabel_clientID}" />
+					<h:outputText value="#{contactClientsController.selected.clientID}" title="#{bundle.ViewContactClientsTitle_clientID}" />
+				</p:panelGrid>
+				<crm:generals item="#{contactClientsController.selected}" />
+
+				<p:commandButton value="#{bundle.Close}" onclick="ContactClientsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

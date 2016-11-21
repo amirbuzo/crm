@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="RequestsEditDlg" widgetVar="RequestsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRequestsTitle}">
+		<h:form id="RequestsEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{requestsController.selected != null}">
+					<p:outputLabel value="#{bundle.EditRequestsLabel_clientContactID}" for="clientContactID" />
+					<p:inputText id="clientContactID" value="#{requestsController.selected.clientContactID}" title="#{bundle.EditRequestsTitle_clientContactID}"
+						required="true" requiredMessage="#{bundle.EditRequestsRequiredMessage_clientContactID}" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_userID}" for="userID" />
+					<p:inputText id="userID" value="#{requestsController.selected.userID}" title="#{bundle.EditRequestsTitle_userID}" required="true"
+						requiredMessage="#{bundle.EditRequestsRequiredMessage_userID}" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_status}" for="status" />
+					<p:inputText id="status" value="#{requestsController.selected.status}" title="#{bundle.EditRequestsTitle_status}" required="true"
+						requiredMessage="#{bundle.EditRequestsRequiredMessage_status}" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_priority}" for="priority" />
+					<p:inputText id="priority" value="#{requestsController.selected.priority}" title="#{bundle.EditRequestsTitle_priority}" required="true"
+						requiredMessage="#{bundle.EditRequestsRequiredMessage_priority}" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_description}" for="description" />
+					<p:inputTextarea rows="4" cols="30" id="description" value="#{requestsController.selected.description}"
+						title="#{bundle.EditRequestsTitle_description}" required="true" requiredMessage="#{bundle.EditRequestsRequiredMessage_description}" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{requestsController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditRequestsRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{requestsController.selected.createdDate}"
+						title="#{bundle.EditRequestsTitle_createdDate}" required="true" requiredMessage="#{bundle.EditRequestsRequiredMessage_createdDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{requestsController.selected.modifiedDate}"
+						title="#{bundle.EditRequestsTitle_modifiedDate}" required="true" requiredMessage="#{bundle.EditRequestsRequiredMessage_modifiedDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.EditRequestsLabel_claimID}" for="claimID" />
+					<p:selectOneMenu id="claimID" value="#{requestsController.selected.claimID}" required="true"
+						requiredMessage="#{bundle.EditRequestsRequiredMessage_claimID}">
+						<f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+						<f:selectItems value="#{claimsController.itemsAvailableSelectOne}" var="claimIDItem" itemValue="#{claimIDItem}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:commandButton actionListener="#{requestsController.update}" value="#{bundle.Save}" update="display,:RequestsListForm:datalist,:growl"
+					oncomplete="handleSubmit(args, 'RequestsEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="RequestsEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

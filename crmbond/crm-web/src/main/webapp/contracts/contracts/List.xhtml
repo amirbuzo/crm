@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/contracts/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListContractsTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="ContractsListForm">
+			<p:contextMenu for="datalist">
+				<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{contractsController.prepareCreate}"
+					update=":ContractsCreateForm" oncomplete="PF('ContractsCreateDialog').show()" />
+				<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":ContractsViewForm" oncomplete="PF('ContractsViewDialog').show()" />
+				<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContractsEditForm" oncomplete="PF('ContractsEditDialog').show()" />
+				<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{contractsController.destroy}"
+					update=":growl,datalist" />
+
+			</p:contextMenu>
+			<p:panel header="#{bundle.ListContractsTitle}">
+				<p:dataTable id="datalist" value="#{contractsController.items}" var="item" selectionMode="single" selection="#{contractsController.selected}"
+					paginator="true" rowKey="#{item.id}" rows="10" lazy="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+					rowsPerPageTemplate="10,20,30,40,50" scrollable="true" resizableColumns="true" liveResize="true" draggableColumns="true">
+			
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<p:graphicImage name="/img/excel.png" width="24" />
+							<p:dataExporter type="xls" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/csv.png" width="24" />
+							<p:dataExporter type="csv" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/xml.png" width="24" />
+							<p:dataExporter type="xml" target="datalist" fileName="cars" />
+						</h:commandLink>
+						<p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+						<p:columnToggler datasource="datalist" trigger="toggler" />
+					</f:facet>
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_clientID}" />
+						</f:facet>
+						<h:outputText value="#{item.clientID}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_dateStarted}" />
+						</f:facet>
+						<h:outputText value="#{item.dateStarted}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_dateFinished}" />
+						</f:facet>
+						<h:outputText value="#{item.dateFinished}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_status}" />
+						</f:facet>
+						<h:outputText value="#{item.status}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_contractValue}" />
+						</f:facet>
+						<h:outputText value="#{item.contractValue}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_exchangeRate}" />
+						</f:facet>
+						<h:outputText value="#{item.exchangeRate}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_information}" />
+						</f:facet>
+						<h:outputText value="#{item.information}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_contractDate}" />
+						</f:facet>
+						<h:outputText value="#{item.contractDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_clientSign}" />
+						</f:facet>
+						<h:outputText value="#{item.clientSign}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_companySign}" />
+						</f:facet>
+						<h:outputText value="#{item.companySign}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_userModified}" />
+						</f:facet>
+						<h:outputText value="#{item.userModified}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_userCreated}" />
+						</f:facet>
+						<h:outputText value="#{item.userCreated}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_isActive}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.isActive}" disabled="true" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_createdDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.createdDate}" />
+					</p:column>
+					<p:column  visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_modifiedDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.modifiedDate}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_currency}" />
+						</f:facet>
+						<h:outputText value="#{item.currency}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListContractsTitle_type}" />
+						</f:facet>
+						<h:outputText value="#{item.type}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{contractsController.prepareCreate}"
+							update=":ContractsCreateForm" oncomplete="PF('ContractsCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":ContractsViewForm"
+							oncomplete="PF('ContractsViewDialog').show()" disabled="#{empty contractsController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContractsEditForm"
+							oncomplete="PF('ContractsEditDialog').show()" disabled="#{empty contractsController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{contractsController.destroy}"
+							update=":growl,datalist" disabled="#{empty contractsController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="ContractsViewDlg" widgetVar="ContractsViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewContractsTitle}">
+		<h:form id="ContractsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{contractsController.selected != null}">
+					<h:outputText value="#{bundle.ViewContractsLabel_id}" />
+					<h:outputText value="#{contractsController.selected.id}" title="#{bundle.ViewContractsTitle_id}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_clientID}" />
+					<h:outputText value="#{contractsController.selected.clientID}" title="#{bundle.ViewContractsTitle_clientID}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_dateStarted}" />
+					<h:outputText value="#{contractsController.selected.dateStarted}" title="#{bundle.ViewContractsTitle_dateStarted}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewContractsLabel_dateFinished}" />
+					<h:outputText value="#{contractsController.selected.dateFinished}" title="#{bundle.ViewContractsTitle_dateFinished}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewContractsLabel_status}" />
+					<h:outputText value="#{contractsController.selected.status}" title="#{bundle.ViewContractsTitle_status}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_contractValue}" />
+					<h:outputText value="#{contractsController.selected.contractValue}" title="#{bundle.ViewContractsTitle_contractValue}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_exchangeRate}" />
+					<h:outputText value="#{contractsController.selected.exchangeRate}" title="#{bundle.ViewContractsTitle_exchangeRate}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_information}" />
+					<h:outputText value="#{contractsController.selected.information}" title="#{bundle.ViewContractsTitle_information}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_contractDate}" />
+					<h:outputText value="#{contractsController.selected.contractDate}" title="#{bundle.ViewContractsTitle_contractDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewContractsLabel_clientSign}" />
+					<h:outputText value="#{contractsController.selected.clientSign}" title="#{bundle.ViewContractsTitle_clientSign}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_companySign}" />
+					<h:outputText value="#{contractsController.selected.companySign}" title="#{bundle.ViewContractsTitle_companySign}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_userModified}" />
+					<h:outputText value="#{contractsController.selected.userModified}" title="#{bundle.ViewContractsTitle_userModified}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_currency}" />
+					<h:outputText value="#{contractsController.selected.currency}" title="#{bundle.ViewContractsTitle_currency}" />
+					<h:outputText value="#{bundle.ViewContractsLabel_type}" />
+					<h:outputText value="#{contractsController.selected.type}" title="#{bundle.ViewContractsTitle_type}" />
+				</p:panelGrid>
+				<crm:generals item="#{contractsController.selected}" />
+				<p:dataTable id="fieldlist" styleClass="fixed-size" value="#{contractsController.selected.attributes.keySet()}" var="var">
+					<f:facet name="header">
+						<p:outputLabel value="#{bundle.dynamcifield}" />
+					</f:facet>
+					<p:column headerText="#{bundle.fieldname}">
+						<p:outputLabel value="#{var}" />
+					</p:column>
+					<p:column headerText="#{bundle.fieldvalue}">
+						<p:outputLabel value="#{contractsController.selected.attributes[var]}" />
+					</p:column>
+				</p:dataTable>
+				<p:commandButton value="#{bundle.Close}" onclick="ContractsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+ 
+        <p:dialog id="EventLogViewDlg" widgetVar="EventLogViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventLogTitle}">
+            <h:form id="EventLogViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{eventLogController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEventLogLabel_id}"/>
+                        <h:outputText value="#{eventLogController.selected.id}" title="#{bundle.ViewEventLogTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_logTimestamp}"/>
+                        <h:outputText value="#{eventLogController.selected.logTimestamp}" title="#{bundle.ViewEventLogTitle_logTimestamp}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_logLevel}"/>
+                        <h:outputText value="#{eventLogController.selected.logLevel}" title="#{bundle.ViewEventLogTitle_logLevel}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_threadName}"/>
+                        <h:outputText value="#{eventLogController.selected.threadName}" title="#{bundle.ViewEventLogTitle_threadName}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_className}"/>
+                        <h:outputText value="#{eventLogController.selected.className}" title="#{bundle.ViewEventLogTitle_className}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_logMessage}"/>
+                        <h:outputText value="#{eventLogController.selected.logMessage}" title="#{bundle.ViewEventLogTitle_logMessage}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exFull}"/>
+                        <h:outputText value="#{eventLogController.selected.exFull}" title="#{bundle.ViewEventLogTitle_exFull}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exShort}"/>
+                        <h:outputText value="#{eventLogController.selected.exShort}" title="#{bundle.ViewEventLogTitle_exShort}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exClassName}"/>
+                        <h:outputText value="#{eventLogController.selected.exClassName}" title="#{bundle.ViewEventLogTitle_exClassName}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exFileName}"/>
+                        <h:outputText value="#{eventLogController.selected.exFileName}" title="#{bundle.ViewEventLogTitle_exFileName}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exLineNumber}"/>
+                        <h:outputText value="#{eventLogController.selected.exLineNumber}" title="#{bundle.ViewEventLogTitle_exLineNumber}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exMethodName}"/>
+                        <h:outputText value="#{eventLogController.selected.exMethodName}" title="#{bundle.ViewEventLogTitle_exMethodName}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exMessage}"/>
+                        <h:outputText value="#{eventLogController.selected.exMessage}" title="#{bundle.ViewEventLogTitle_exMessage}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_exLocalizedMessage}"/>
+                        <h:outputText value="#{eventLogController.selected.exLocalizedMessage}" title="#{bundle.ViewEventLogTitle_exLocalizedMessage}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_userId}"/>
+                        <h:outputText value="#{eventLogController.selected.userId}" title="#{bundle.ViewEventLogTitle_userId}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_username}"/>
+                        <h:outputText value="#{eventLogController.selected.username}" title="#{bundle.ViewEventLogTitle_username}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_objecttype}"/>
+                        <h:outputText value="#{eventLogController.selected.objecttype}" title="#{bundle.ViewEventLogTitle_objecttype}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_action}"/>
+                        <h:outputText value="#{eventLogController.selected.action}" title="#{bundle.ViewEventLogTitle_action}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_appid}"/>
+                        <h:outputText value="#{eventLogController.selected.appid}" title="#{bundle.ViewEventLogTitle_appid}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_usersession}"/>
+                        <h:outputText value="#{eventLogController.selected.usersession}" title="#{bundle.ViewEventLogTitle_usersession}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_event}"/>
+                        <h:outputText value="#{eventLogController.selected.event}" title="#{bundle.ViewEventLogTitle_event}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_objectid}"/>
+                        <h:outputText value="#{eventLogController.selected.objectid}" title="#{bundle.ViewEventLogTitle_objectid}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_moduleid}"/>
+                        <h:outputText value="#{eventLogController.selected.moduleid}" title="#{bundle.ViewEventLogTitle_moduleid}"/>
+                        <h:outputText value="#{bundle.ViewEventLogLabel_resultid}"/>
+                        <h:outputText value="#{eventLogController.selected.resultid}" title="#{bundle.ViewEventLogTitle_resultid}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EventLogViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

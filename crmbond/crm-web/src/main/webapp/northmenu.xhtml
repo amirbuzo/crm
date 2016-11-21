@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+
+	<h:form id="menuFormt">
+
+		<p:menubar>
+			<p:menuitem value="#{bundle.Home}" outcome="index" icon="ui-icon-home" />
+			<p:submenu label="#{bundle.ListInteractionServicesTitle}" icon="ui-icon-battery-0"
+				rendered="#{request.isUserInRole('EMPLOYEE') || request.isUserInRole('MANAGER') || request.isUserInRole('ADMIN') || request.isUserInRole('SUPERUSER')}">
+
+
+				<p:menuitem value="#{bundle.ListInteractionCategoriesTitle}" outcome="/servicemanagement/interactionCategories/List.xhtml" />
+				<p:menuitem value="#{bundle.ListInteractionServicesTitle}" outcome="/servicemanagement/interactionServices/List.xhtml" />
+				<p:menuitem value="Logs" outcome="/servicemanagement/logs/List.xhtml" />
+				<p:menuitem value="My Tasks" outcome="/servicemanagement/assigns/List.xhtml" />
+
+				<p:menuitem value="#{bundle.ListRequestsTitle}" outcome="/servicemanagement/requests/List.xhtml" />
+
+			</p:submenu>
+			<p:submenu label="#{bundle.ListClientsTitle}" icon="ui-icon-contact"
+				rendered="#{request.isUserInRole('CONTRACT') || request.isUserInRole('ADMIN') || request.isUserInRole('SUPERUSER')}">
+				<p:menuitem value="#{bundle.ListClientsTitle}" outcome="/clients/clients/List.xhtml" />
+				<p:menuitem value="#{bundle.ListCompanyTitle}" outcome="/clients/company/List.xhtml" />
+				<p:menuitem value="#{bundle.ListContactClientsTitle}" outcome="/clients/contactClients/List.xhtml" />
+			</p:submenu>
+			<p:submenu label="Admin Maintenace" icon="ui-icon-gear" rendered="#{request.isUserInRole('ADMIN')}">
+				<p:menuitem value="#{bundle.ListStatesTitle}" outcome="/admin/states/List.xhtml" />
+				<p:menuitem value="#{bundle.ListCitiesTitle}" outcome="/admin/cities/List.xhtml" />
+				<p:menuitem value="#{bundle.ListAimsTitle}" outcome="/admin/aims/List.xhtml" />
+				<p:menuitem value="#{bundle.ListEmailTitle}" outcome="/admin/email/List.xhtml" />
+				<p:menuitem value="#{bundle.ListBussinessTypesTitle}" outcome="/admin/bussinessTypes/List.xhtml" />
+				<p:menuitem value="Currency" outcome="/admin/currency/List.xhtml" />
+
+				<p:menuitem value="#{bundle.ListInteractionServiceTypesTitle}" outcome="/admin/interactionServiceTypes/List.xhtml" />
+				<p:menuitem value="#{bundle.ListPrioritiesTitle}" outcome="/admin/priorities/List.xhtml" />
+				<p:menuitem value="#{bundle.ListClaimsTitle}" outcome="/admin/claims/List.xhtml" />
+				<p:menuitem value="#{bundle.ListEventLogTitle}" outcome="/admin/eventLog/List.xhtml" />
+				<p:menuitem value="#{bundle.ListDynamicFieldTitle}" outcome="/admin/dynamicField/List.xhtml" />
+
+			</p:submenu>
+			<p:submenu label="#{bundle.ListContractsTitle}" icon="ui-icon-battery-2"
+				rendered="#{request.isUserInRole('CONTRACT') || request.isUserInRole('ADMIN') || request.isUserInRole('SUPERUSER')}">
+				<p:menuitem value="#{bundle.ListContractsTitle}" outcome="/contracts/contracts/List.xhtml" />
+				<p:menuitem value="#{bundle.ListContractTypesTitle}" outcome="/contracts/contractTypes/List.xhtml" />
+			</p:submenu>
+			<p:submenu label="Marketing" icon="ui-icon-document-b"
+				rendered="#{request.isUserInRole('MARKETING') || request.isUserInRole('ADMIN') || request.isUserInRole('SUPERUSER')}">
+				<p:menuitem value="#{bundle.ListPotentialClientsTitle}" outcome="/marketing/potentialClients/List.xhtml" />
+				<p:menuitem value="#{bundle.ListPotentialContactCategoriesTitle}" outcome="/marketing/potentialContactCategories/List.xhtml" />
+				<p:menuitem value="#{bundle.ListPotentialContactsTitle}" outcome="/marketing/potentialContacts/List.xhtml" />
+				<p:menuitem value="#{bundle.ListEventCategoriesTitle}" outcome="/marketing/eventCategories/List.xhtml" />
+				<p:menuitem value="#{bundle.ListEventsTitle}" outcome="/marketing/events/List.xhtml" />
+				<p:menuitem value="#{bundle.ListReferencesTitle}" outcome="/marketing/references/List.xhtml" />
+
+			</p:submenu>
+			<p:submenu label="#{bundle.ListUserTitle}" icon="ui-icon-document"
+				rendered="#{request.isUserInRole('ADMIN') || request.isUserInRole('HUMANRESOURCES') || request.isUserInRole('SUPERUSER')}">
+				<p:menuitem value="#{bundle.ListUserTitle}" outcome="/usermanagement/user/List.xhtml" />
+				<p:menuitem value="UserEntityPermission" outcome="/usermanagement/userEntityPermission/List.xhtml" />
+				<p:menuitem value="UserPermission" outcome="/usermanagement/userPermission/List.xhtml" />
+				<p:menuitem value="UserRights" outcome="/usermanagement/userRights/List.xhtml" />
+				<p:menuitem value="#{bundle.ListRolesTitle}" outcome="/usermanagement/roles/List.xhtml" />
+
+			</p:submenu>
+			<p:submenu label="Report" icon="ui-icon-newwin" rendered="#{request.isUserInRole('ADMIN')}">
+				<p:menuitem value="ClientAnalysis Report" outcome="/report/report.xhtml" />
+				<p:menuitem value="ClientContract" outcome="index" />
+				<p:menuitem value="ClientInteraction" outcome="index" />
+				<p:menuitem value="ClientPriority" outcome="index" />
+				<p:menuitem value="ClientRelation" outcome="index" />
+				<p:menuitem value="ClientStatus" outcome="/report/clientstatusreport.xhtml" />
+				<p:menuitem value="Contracts" outcome="/report/contractreport.xhtml" />
+				<p:menuitem value="ContractPreview" outcome="index" />
+				<p:menuitem value="ContractReport" outcome="index" />
+				<p:menuitem value="FinishingContracts" outcome="index" />
+				<p:menuitem value="History" outcome="index" />
+				<p:menuitem value="InteractionService" outcome="index" />
+				<p:menuitem value="logs" outcome="/report/report.xhtml" />
+				<p:menuitem value="Request" outcome="index" />
+				<p:menuitem value="Service Aim" outcome="/report/serviceaimreport.xhtml" />
+				<p:menuitem value="Service Analysis" outcome="index" />
+				<p:menuitem value="Service Contract" outcome="index" />
+				<p:menuitem value="Service Type" outcome="index" />
+				<p:menuitem value="Un Contacted Client Report" outcome="index" />
+				<p:menuitem value="User Performance" outcome="index" />
+
+			</p:submenu>
+			<p:submenu label="#{request.userPrincipal.name}" icon="ui-icon-person">
+				<p:menuitem value="My Tasks" outcome="/user/assigns/List.xhtml" />
+				<p:menuitem value="My Profile" outcome="/user/profile.xhtml" />
+				<p:menuitem value="Change Password" outcome="/user/changepassword.xhtml" />
+				<p:menuitem value="My Preferences" outcome="/user/mypreferences.xhtml" />
+				<p:menuitem value="#{bundle['login.title.logout']}" action="#{loginBean.logout}" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/clients/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListClientsTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="ClientsListForm">
+			<p:contextMenu for="datalist">
+				<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{clientsController.prepareCreate}"
+					update=":ClientsCreateForm" oncomplete="PF('ClientsCreateDialog').show()" />
+				<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":ClientsViewForm" oncomplete="PF('ClientsViewDialog').show()" />
+				<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClientsEditForm" oncomplete="PF('ClientsEditDialog').show()" />
+				<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{clientsController.destroy}" update=":growl,datalist" />
+			</p:contextMenu>
+			<p:panel header="#{bundle.ListClientsTitle}">
+				<p:dataTable id="datalist" value="#{clientsController.items}" var="item" selectionMode="single" selection="#{clientsController.selected}"
+					paginator="true" rowKey="#{item.id}" rows="10" lazy="true" rowsPerPageTemplate="10,20,30,40,50" scrollable="true" resizableColumns="true"
+					liveResize="true" draggableColumns="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<p:graphicImage name="/img/excel.png" width="24" />
+							<p:dataExporter type="xls" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/csv.png" width="24" />
+							<p:dataExporter type="csv" target="datalist" fileName="cars" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<p:graphicImage name="/img/xml.png" width="24" />
+							<p:dataExporter type="xml" target="datalist" fileName="cars" />
+						</h:commandLink>
+						<p:commandButton id="toggler" type="button" value="Columns" icon="ui-icon-calculator" />
+						<p:columnToggler datasource="datalist" trigger="toggler" />
+					</f:facet>
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_clientName}" />
+						</f:facet>
+						<h:outputText value="#{item.clientName}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_legalStatus}" />
+						</f:facet>
+						<h:outputText value="#{utils.clientstatusmap[item.legalStatus] }" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_phone}" />
+						</f:facet>
+						<h:outputText value="#{item.phone}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_mobilePhone}" />
+						</f:facet>
+						<h:outputText value="#{item.mobilePhone}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_administrator}" />
+						</f:facet>
+						<h:outputText value="#{item.administrator}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_nipt}" />
+						</f:facet>
+						<h:outputText value="#{item.nipt}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_otherInformation}" />
+						</f:facet>
+						<h:outputText value="#{item.otherInformation}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_clientSinceDate}" />
+						</f:facet>
+						<h:outputText value="#{item.clientSinceDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_fax}" />
+						</f:facet>
+						<h:outputText value="#{item.fax}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_address}" />
+						</f:facet>
+						<h:outputText value="#{item.address}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_email}" />
+						</f:facet>
+						<h:outputText value="#{item.email}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_website}" />
+						</f:facet>
+						<h:outputText value="#{item.website}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_city}" />
+						</f:facet>
+						<h:outputText value="#{item.city}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_numberOfEmployee}" />
+						</f:facet>
+						<h:outputText value="#{item.numberOfEmployee}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_status}" />
+						</f:facet>
+						<h:outputText value="#{item.status}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_userIDAssistent}" />
+						</f:facet>
+						<h:outputText value="#{item.userIDAssistent}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_userModified}" />
+						</f:facet>
+						<h:outputText value="#{item.userModified}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_userCreated}" />
+						</f:facet>
+						<h:outputText value="#{item.userCreated}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_isActive}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.isActive}" disabled="true" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_createdDate}" />
+						</f:facet>
+
+						<crm:crmdate item="#{item.createdDate}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_modifiedDate}" />
+						</f:facet>
+						<crm:crmdate item="#{item.modifiedDate}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_priority}" />
+						</f:facet>
+						<h:outputText value="#{item.priority}" />
+					</p:column>
+					<p:column visible="false">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListClientsTitle_bussinessType}" />
+						</f:facet>
+						<h:outputText value="#{item.bussinessType}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{clientsController.prepareCreate}"
+							update=":ClientsCreateForm" oncomplete="PF('ClientsCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":ClientsViewForm"
+							oncomplete="PF('ClientsViewDialog').show()" disabled="#{empty clientsController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClientsEditForm"
+							oncomplete="PF('ClientsEditDialog').show()" disabled="#{empty clientsController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{clientsController.destroy}"
+							update=":growl,datalist" disabled="#{empty clientsController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>

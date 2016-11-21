@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="PotentialClientsCreateDlg" widgetVar="PotentialClientsCreateDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.CreatePotentialClientsTitle}">
+		<h:form id="PotentialClientsCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{potentialClientsController.selected != null}">
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_name}" for="name" />
+					<p:inputText id="name" value="#{potentialClientsController.selected.name}" title="#{bundle.CreatePotentialClientsTitle_name}" required="true"
+						requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_name}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_phone}" for="phone" />
+					<p:inputText id="phone" value="#{potentialClientsController.selected.phone}" title="#{bundle.CreatePotentialClientsTitle_phone}" required="true"
+						requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_phone}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_mobilePhone}" for="mobilePhone" />
+					<p:inputText id="mobilePhone" value="#{potentialClientsController.selected.mobilePhone}"
+						title="#{bundle.CreatePotentialClientsTitle_mobilePhone}" required="true"
+						requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_mobilePhone}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_priority}" for="priority" />
+					<p:inputText id="priority" value="#{potentialClientsController.selected.priority}" title="#{bundle.CreatePotentialClientsTitle_priority}"
+						required="true" requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_priority}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_address}" for="address" />
+					<p:inputText id="address" value="#{potentialClientsController.selected.address}" title="#{bundle.CreatePotentialClientsTitle_address}"
+						required="true" requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_address}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_email}" for="email" />
+					<p:inputText id="email" value="#{potentialClientsController.selected.email}" title="#{bundle.CreatePotentialClientsTitle_email}" required="true"
+						requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_email}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_information}" for="information" />
+					<p:inputText id="information" value="#{potentialClientsController.selected.information}"
+						title="#{bundle.CreatePotentialClientsTitle_information}" required="true"
+						requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_information}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_status}" for="status" />
+					<p:inputText id="status" value="#{potentialClientsController.selected.status}" title="#{bundle.CreatePotentialClientsTitle_status}"
+						required="true" requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_status}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_userCreated}" for="userCreated" />
+					<p:inputText id="userCreated" value="#{potentialClientsController.selected.userCreated}"
+						title="#{bundle.CreatePotentialClientsTitle_userCreated}" required="true"
+						requiredMessage="#{bundle.CreatePotentialClientsRequiredMessage_userCreated}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{potentialClientsController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{potentialClientsController.selected.createdDate}"
+						title="#{bundle.EditPotentialClientsTitle_createdDate}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_createdDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.CreatePotentialClientsLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{potentialClientsController.selected.modifiedDate}"
+						title="#{bundle.EditPotentialClientsTitle_modifiedDate}" required="true"
+						requiredMessage="#{bundle.EditPotentialClientsRequiredMessage_modifiedDate}" showOn="button" />
+				</p:panelGrid>
+				<p:commandButton actionListener="#{potentialClientsController.create}" value="#{bundle.Save}"
+					update="display,:PotentialClientsListForm:datalist,:growl" oncomplete="handleSubmit(args,'PotentialClientsCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="PotentialClientsCreateDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

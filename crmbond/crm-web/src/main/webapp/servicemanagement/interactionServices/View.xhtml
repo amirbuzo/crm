@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="InteractionServicesViewDlg" widgetVar="InteractionServicesViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewInteractionServicesTitle}">
+		<h:form id="InteractionServicesViewForm">
+			<h:panelGroup id="display">
+				<p:tabView>
+					<p:tab title="MAIN INFO">
+						<p:panelGrid columns="4" rendered="#{interactionServicesController.selected != null}">
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_id}" />
+							<h:outputText value="#{interactionServicesController.selected.id}" title="#{bundle.ViewInteractionServicesTitle_id}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_userModified}" />
+							<h:outputText value="#{interactionServicesController.selected.userModified}" title="#{bundle.ViewInteractionServicesTitle_userModified}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_place}" />
+							<h:outputText value="#{interactionServicesController.selected.place}" title="#{bundle.ViewInteractionServicesTitle_place}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_dateStarted}" />
+							<h:outputText value="#{interactionServicesController.selected.dateStarted}" title="#{bundle.ViewInteractionServicesTitle_dateStarted}">
+								<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+							</h:outputText>
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_dateFinished}" />
+							<h:outputText value="#{interactionServicesController.selected.dateFinished}" title="#{bundle.ViewInteractionServicesTitle_dateFinished}">
+								<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+							</h:outputText>
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_userDescription}" />
+							<h:outputText value="#{interactionServicesController.selected.userDescription}" title="#{bundle.ViewInteractionServicesTitle_userDescription}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_status}" />
+							<h:outputText value="#{interactionServicesController.selected.status}" title="#{bundle.ViewInteractionServicesTitle_status}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_priority}" />
+							<h:outputText value="#{interactionServicesController.selected.priority}" title="#{bundle.ViewInteractionServicesTitle_priority}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_contract}" />
+							<p:selectBooleanCheckbox value="#{interactionServicesController.selected.contract}" disabled="true" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_price}" />
+							<h:outputText value="#{interactionServicesController.selected.price}" title="#{bundle.ViewInteractionServicesTitle_price}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_otherCost}" />
+							<h:outputText value="#{interactionServicesController.selected.otherCost}" title="#{bundle.ViewInteractionServicesTitle_otherCost}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_currency}" />
+							<h:outputText value="#{interactionServicesController.selected.currency}" title="#{bundle.ViewInteractionServicesTitle_currency}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_exchangeRate}" />
+							<h:outputText value="#{interactionServicesController.selected.exchangeRate}" title="#{bundle.ViewInteractionServicesTitle_exchangeRate}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_period}" />
+							<h:outputText value="#{interactionServicesController.selected.period}" title="#{bundle.ViewInteractionServicesTitle_period}" />
+
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_categoryID}" />
+							<h:outputText value="#{interactionServicesController.selected.categoryID}" title="#{bundle.ViewInteractionServicesTitle_categoryID}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_clientContactID}" />
+							<h:outputText value="#{interactionServicesController.selected.clientContactID}" title="#{bundle.ViewInteractionServicesTitle_clientContactID}" />
+							<h:outputText value="#{bundle.ViewInteractionServicesLabel_aimID}" />
+							<h:outputText value="#{interactionServicesController.selected.aimID.aimDescription}" title="#{bundle.ViewInteractionServicesTitle_aimID}" />
+						</p:panelGrid>
+					</p:tab>
+					<p:tab title="General">
+						<p:panelGrid columns="4" rendered="#{interactionServicesController.selected != null}">
+							<crm:generals item="#{interactionServicesController.selected}" />
+						</p:panelGrid>
+					</p:tab>
+					<p:tab title="Assigns">
+						<p:dataTable var="item" value="#{interactionServicesController.selected.assignsList}">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListAssignsTitle_id}" />
+								</f:facet>
+								<h:outputText value="#{item.id}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListAssignsTitle_userID}" />
+								</f:facet>
+								<h:outputText value="#{item.userID}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListAssignsTitle_isActive}" />
+								</f:facet>
+								<p:selectBooleanCheckbox value="#{item.isActive}" disabled="true" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListAssignsTitle_createdDate}" />
+								</f:facet>
+								<h:outputText value="#{item.createdDate}">
+									<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListAssignsTitle_modifiedDate}" />
+								</f:facet>
+								<h:outputText value="#{item.modifiedDate}">
+									<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListAssignsTitle_interactionID}" />
+								</f:facet>
+								<h:outputText value="#{item.interactionID}" />
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+
+					<p:tab title="Logs">
+						<p:dataTable var="item" value="#{interactionServicesController.selected.interactionLogs}">
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_id}" />
+								</f:facet>
+								<h:outputText value="#{item.id}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_interactionID}" />
+								</f:facet>
+								<h:outputText value="#{item.interactionID.toString()}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_userID}" />
+								</f:facet>
+								<h:outputText value="#{item.userID}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_note}" />
+								</f:facet>
+								<h:outputText value="#{item.note}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_interactionStatus}" />
+								</f:facet>
+								<h:outputText value="#{item.interactionStatus}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_timePeriod}" />
+								</f:facet>
+								<h:outputText value="#{item.timePeriod}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_interactionType}" />
+								</f:facet>
+								<h:outputText value="#{item.interactionType}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_contactID}" />
+								</f:facet>
+								<h:outputText value="#{item.contactID}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_createdDate}" />
+								</f:facet>
+								<h:outputText value="#{item.createdDate}">
+									<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{bundle.ListLogsTitle_modifiedDate}" />
+								</f:facet>
+								<h:outputText value="#{item.modifiedDate}">
+									<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+
+				</p:tabView>
+
+				<p:commandButton value="#{bundle.Close}" ajax="true" onclick="PF('InteractionServicesViewDialog').hide();" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="PotentialContactsEditDlg" widgetVar="PotentialContactsEditDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.EditPotentialContactsTitle}">
+		<h:form id="PotentialContactsEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="4" rendered="#{potentialContactsController.selected != null}">
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_name}" for="name" />
+					<p:inputText id="name" value="#{potentialContactsController.selected.name}" title="#{bundle.EditPotentialContactsTitle_name}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_name}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_surname}" for="surname" />
+					<p:inputText id="surname" value="#{potentialContactsController.selected.surname}" title="#{bundle.EditPotentialContactsTitle_surname}"
+						required="true" requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_surname}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_phone}" for="phone" />
+					<p:inputText id="phone" value="#{potentialContactsController.selected.phone}" title="#{bundle.EditPotentialContactsTitle_phone}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_phone}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_mobilePhone}" for="mobilePhone" />
+					<p:inputText id="mobilePhone" value="#{potentialContactsController.selected.mobilePhone}"
+						title="#{bundle.EditPotentialContactsTitle_mobilePhone}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_mobilePhone}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_email}" for="email" />
+					<p:inputText id="email" value="#{potentialContactsController.selected.email}" title="#{bundle.EditPotentialContactsTitle_email}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_email}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_priority}" for="priority" />
+					<p:inputText id="priority" value="#{potentialContactsController.selected.priority}" title="#{bundle.EditPotentialContactsTitle_priority}"
+						required="true" requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_priority}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_address}" for="address" />
+					<p:inputText id="address" value="#{potentialContactsController.selected.address}" title="#{bundle.EditPotentialContactsTitle_address}"
+						required="true" requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_address}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_userAssign}" for="userAssign" />
+					<p:inputText id="userAssign" value="#{potentialContactsController.selected.userAssign}" title="#{bundle.EditPotentialContactsTitle_userAssign}"
+						required="true" requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_userAssign}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_userCreated}" for="userCreated" />
+					<p:inputText id="userCreated" value="#{potentialContactsController.selected.userCreated}"
+						title="#{bundle.EditPotentialContactsTitle_userCreated}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_userCreated}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_information}" for="information" />
+					<p:inputTextarea rows="4" cols="30" id="information" value="#{potentialContactsController.selected.information}"
+						title="#{bundle.EditPotentialContactsTitle_information}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_information}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_status}" for="status" />
+					<p:inputText id="status" value="#{potentialContactsController.selected.status}" title="#{bundle.EditPotentialContactsTitle_status}"
+						required="true" requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_status}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_isActive}" for="isActive" />
+					<p:selectBooleanCheckbox id="isActive" value="#{potentialContactsController.selected.isActive}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_isActive}" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_createdDate}" for="createdDate" />
+					<p:calendar id="createdDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{potentialContactsController.selected.createdDate}"
+						title="#{bundle.EditPotentialContactsTitle_createdDate}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_createdDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_modifiedDate}" for="modifiedDate" />
+					<p:calendar id="modifiedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{potentialContactsController.selected.modifiedDate}"
+						title="#{bundle.EditPotentialContactsTitle_modifiedDate}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_modifiedDate}" showOn="button" />
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_referenca}" for="referenca" />
+					<p:selectOneMenu id="referenca" value="#{potentialContactsController.selected.referenca}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_referenca}">
+						<f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+						<f:selectItems value="#{referencesController.itemsAvailableSelectOne}" var="referencaItem" itemValue="#{referencaItem}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_category}" for="category" />
+					<p:selectOneMenu id="category" value="#{potentialContactsController.selected.category}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_category}">
+						<f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+						<f:selectItems value="#{potentialContactCategoriesController.itemsAvailableSelectOne}" var="categoryItem" itemValue="#{categoryItem}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="#{bundle.EditPotentialContactsLabel_potentialClient}" for="potentialClient" />
+					<p:selectOneMenu id="potentialClient" value="#{potentialContactsController.selected.potentialClient}" required="true"
+						requiredMessage="#{bundle.EditPotentialContactsRequiredMessage_potentialClient}">
+						<f:selectItem itemLabel="#{bundle.SelectOneMessage}" />
+						<f:selectItems value="#{potentialClientsController.itemsAvailableSelectOne}" var="potentialClientItem" itemValue="#{potentialClientItem}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:commandButton actionListener="#{potentialContactsController.update}" value="#{bundle.Save}"
+					update="display,:PotentialContactsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PotentialContactsEditDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="PotentialContactsEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

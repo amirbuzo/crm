@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<Configuration>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		
+
+
+<!-- 		<JDBC name="databaseAppender" tableName="Logs"> -->
+<!-- 			<DataSource jndiName="openejb:Resource/jdbc/crmds" /> -->
+<!-- 			<Column name="MODULEID" pattern="%X{moduleId}" isUnicode="false" /> -->
+<!-- 			<Column name="DATE" isEventTimestamp="true" /> -->
+<!-- 			<Column name="EVENTACTION" pattern="%X{eventAction}" isUnicode="false" /> -->
+<!-- 			<Column name="RESULT" pattern="%X{result}" isUnicode="false" /> -->
+<!-- 			<Column name="MESSAGE" pattern="%msg" isUnicode="false" /> -->
+<!-- 			<Column name="USERNAME" pattern="%X{userUid}" isUnicode="false" /> -->
+<!-- 			<Column name="SESSIONID" pattern="%X{sessionId}" isUnicode="false" /> -->
+<!-- 			<Column name="LEVEL" pattern="%level" isUnicode="false" /> -->
+<!-- 			<Column name="LOGGER" pattern="%logger" isUnicode="false" /> -->
+<!-- 			<Column name="OBJECTTYPE" pattern="%X{objectType}" isUnicode="false" /> -->
+<!-- 			<Column name="OBJECTID" pattern="%X{objectId}" isUnicode="false" /> -->
+<!-- 			<Column name="USERUUID" pattern="%X{username}" isUnicode="false" /> -->
+
+<!-- 		</JDBC> -->
+		
+<!-- 			<JDBC name="Database-queue-full-3" tableName="Log"> -->
+<!-- 			<DataSource jndiName="java:/comp/env/bigcrm/jdts" /> -->
+<!-- 			<Column name="log_timestamp" isEventTimestamp="true" /> -->
+<!--         <Column name="log_level" pattern="%level" />  -->
+<!--         <Column name="thread_name" pattern="%t" /> -->
+<!--         <Column name="client_id" pattern="%X{clientId}" /> -->
+<!--         <Column name="class_name" pattern="%c" /> -->
+<!--         <Column name="nested_diagnostic_context" pattern="%x" /> -->
+<!--         <Column name="log_message" pattern="%message" /> -->
+<!--         <Column name="ex_full" pattern="%throwable{full}" isClob="true" /> -->
+<!--         <Column name="ex_short" pattern="%throwable{short}" /> -->
+<!--         <Column name="ex_class_name" pattern="%throwable{short.className}" /> -->
+<!--         <Column name="ex_file_name" pattern="%throwable{short.fileName}" /> -->
+<!--         <Column name="ex_line_number" pattern="%throwable{short.lineNumber}" /> -->
+<!--         <Column name="ex_method_name" pattern="%throwable{short.methodName}" /> -->
+<!--         <Column name="ex_message" pattern="%throwable{short.message}" /> -->
+<!--         <Column name="ex_localized_message" pattern="%throwable{short.localizedMessage}" /> -->
+
+
+
+		<RollingRandomAccessFile name="File"
+			fileName="/home/tomcat2/CRM/logs/crm.log" filePattern="/CRM/logs/crm-%d{yyyy-MM-dd}-(%i).log">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %X{eventAction} => %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250 MB" />
+			</Policies>
+			<!-- <DefaultRolloverStrategy max="20"/> -->
+		</RollingRandomAccessFile>
+
+
+		<RollingRandomAccessFile name="AdminFile"
+			fileName="/home/tomcat2/CRM/logs/crm.log" filePattern="/CRM/logs/crm-%d{yyyy-MM-dd}-(%i).log">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} -- %logger{36} -- %-5level -- Event = '%X{eventAction}' -- Result = '%X{result}' -- Username = '%X{user}' -- Session id = '%X{userId}' %nMessage => %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250 MB" />
+			</Policies>
+			<!-- <DefaultRolloverStrategy max="20"/> -->
+		</RollingRandomAccessFile>
+    <JDBC name="databaseAppender" tableName="EventLog">
+      <DataSource jndiName="openejb:Resource/jdbc/crmds" />
+<!--          <Column name="LOGDATE" isEventTimestamp="true" />   -->
+<!--         <Column name="LOGGER" pattern="%logger" isUnicode="false" />   -->
+<!--         <Column name="LOGLEVEL" pattern="%level" isUnicode="false" />   -->
+<!-- 			<Column name="MESSAGE" pattern="%message" isUnicode="false"/> -->
+  <Column name="log_timestamp" isEventTimestamp="true" />
+        <Column name="log_level" pattern="%level"  isUnicode="false"/> 
+        <Column name="thread_name" pattern="%t" isUnicode="false"/>
+        <Column name="class_name" pattern="%c{1}" isUnicode="false"/>
+        <Column name="log_message" pattern="%message" isUnicode="false"/>
+        <Column name="ex_full" pattern="%throwable{full}"  isUnicode="false"/>
+        <Column name="ex_short" pattern="%throwable{short}" isUnicode="false"/>
+        <Column name="ex_class_name" pattern="%throwable{short.className}" isUnicode="false"/>
+        <Column name="ex_file_name" pattern="%throwable{short.fileName}" isUnicode="false"/>
+        <Column name="ex_line_number" pattern="%throwable{short.lineNumber}" isUnicode="false"/>
+        <Column name="ex_method_name" pattern="%throwable{short.methodName}" isUnicode="false"/>
+        <Column name="ex_message" pattern="%throwable{short.message}" isUnicode="false"/>
+        <Column name="ex_localized_message" pattern="%throwable{short.localizedMessage}" isUnicode="false"/>
+        <Column name="user_id" pattern="%userid" isUnicode="false"/>
+        <Column name="username" pattern="%map{username}" isUnicode="false"/>
+        <Column name="objecttype" pattern="%map{objecttype}" isUnicode="false"/>
+        <Column name="action" pattern="%map{action}" isUnicode="false"/>
+        <Column name="appid" pattern="%map{appid}" isUnicode="false"/>
+        <Column name="usersession" pattern="%map{usersession}" isUnicode="false"/>
+        <Column name="event" pattern="%map{event}" isUnicode="false"/>
+        <Column name="objectid" pattern="%map{objectid}" isUnicode="false"/>
+        <Column name="moduleid" pattern="%map{objectid}" isUnicode="false"/>
+        <Column name="resultid" pattern="%map{objectid}" isUnicode="false"/>
+        
+    </JDBC>
+     <Async name="async-db"
+           blocking="false"
+           ignoreExceptions="true"
+           bufferSize="50000"
+           includeLocation="false">
+      <AppenderRef ref="databaseAppender"/>
+    </Async>
+	</Appenders>
+	<Loggers>
+
+
+		<Root level="ALL" additivity="true">
+			<AppenderRef ref="Console" />
+			      <AppenderRef ref="async-db"/>
+			      <AppenderRef ref="File" />
+			
+		</Root>
+		
+		<logger name="com.crm" additivity="true">
+			<level value="ALL" />
+			
+		</logger>
+		
+		
+
+<!-- 		<logger name="MSSQLLog"> -->
+<!-- 			<level value="INFO" /> -->
+<!-- 			<AppenderRef ref="Console" /> -->
+<!-- 			<AppenderRef ref="File" /> -->
+<!-- 			<AppenderRef ref="AdminFile" /> -->
+<!-- 			<AppenderRef ref="databaseAppender" /> -->
+<!-- 			<ThreadContextMapFilter onMatch="ACCEPT" -->
+<!-- 				onMismatch="DENY" operator="or"> -->
+
+<!-- 				<KeyValuePair key="result" value="SUCCESS" /> -->
+<!-- 				<KeyValuePair key="result" value="FAIL" /> -->
+<!-- 				<KeyValuePair key="appId" value="crm" /> -->
+
+<!-- 			</ThreadContextMapFilter> -->
+<!-- 		</logger> -->
+
+	</Loggers>
+</Configuration>

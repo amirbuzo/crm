@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="EventsViewDlg" widgetVar="EventsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventsTitle}">
+		<h:form id="EventsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{eventsController.selected != null}">
+					<h:outputText value="#{bundle.ViewEventsLabel_id}" />
+					<h:outputText value="#{eventsController.selected.id}" title="#{bundle.ViewEventsTitle_id}" />
+					<h:outputText value="#{bundle.ViewEventsLabel_contactID}" />
+					<h:outputText value="#{eventsController.selected.contactID}" title="#{bundle.ViewEventsTitle_contactID}" />
+					<h:outputText value="#{bundle.ViewEventsLabel_contactWay}" />
+					<h:outputText value="#{eventsController.selected.contactWay}" title="#{bundle.ViewEventsTitle_contactWay}" />
+					<h:outputText value="#{bundle.ViewEventsLabel_contactDate}" />
+					<h:outputText value="#{eventsController.selected.contactDate}" title="#{bundle.ViewEventsTitle_contactDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewEventsLabel_userCreated}" />
+					<h:outputText value="#{eventsController.selected.userCreated}" title="#{bundle.ViewEventsTitle_userCreated}" />
+					<h:outputText value="#{bundle.ViewEventsLabel_information}" />
+					<h:outputText value="#{eventsController.selected.information}" title="#{bundle.ViewEventsTitle_information}" />
+					<h:outputText value="#{bundle.ViewEventsLabel_reContact}" />
+					<p:selectBooleanCheckbox value="#{eventsController.selected.reContact}" disabled="true" />
+					<h:outputText value="#{bundle.ViewEventsLabel_reContactDate}" />
+					<h:outputText value="#{eventsController.selected.reContactDate}" title="#{bundle.ViewEventsTitle_reContactDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewEventsLabel_reContactWay}" />
+					<h:outputText value="#{eventsController.selected.reContactWay}" title="#{bundle.ViewEventsTitle_reContactWay}" />
+					<h:outputText value="#{bundle.ViewEventsLabel_isActive}" />
+					<p:selectBooleanCheckbox value="#{eventsController.selected.isActive}" disabled="true" />
+					<h:outputText value="#{bundle.ViewEventsLabel_createdDate}" />
+					<h:outputText value="#{eventsController.selected.createdDate}" title="#{bundle.ViewEventsTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewEventsLabel_modifiedDate}" />
+					<h:outputText value="#{eventsController.selected.modifiedDate}" title="#{bundle.ViewEventsTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewEventsLabel_category}" />
+					<h:outputText value="#{eventsController.selected.category}" title="#{bundle.ViewEventsTitle_category}" />
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="EventsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

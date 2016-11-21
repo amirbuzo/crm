@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="PotentialContactCategoriesViewDlg" widgetVar="PotentialContactCategoriesViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewPotentialContactCategoriesTitle}">
+		<h:form id="PotentialContactCategoriesViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{potentialContactCategoriesController.selected != null}">
+					<h:outputText value="#{bundle.ViewPotentialContactCategoriesLabel_id}" />
+					<h:outputText value="#{potentialContactCategoriesController.selected.id}" title="#{bundle.ViewPotentialContactCategoriesTitle_id}" />
+					<h:outputText value="#{bundle.ViewPotentialContactCategoriesLabel_description}" />
+					<h:outputText value="#{potentialContactCategoriesController.selected.description}"
+						title="#{bundle.ViewPotentialContactCategoriesTitle_description}" />
+					<h:outputText value="#{bundle.ViewPotentialContactCategoriesLabel_isActive}" />
+					<p:selectBooleanCheckbox value="#{potentialContactCategoriesController.selected.isActive}" disabled="true" />
+					<h:outputText value="#{bundle.ViewPotentialContactCategoriesLabel_createdDate}" />
+					<h:outputText value="#{potentialContactCategoriesController.selected.createdDate}"
+						title="#{bundle.ViewPotentialContactCategoriesTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewPotentialContactCategoriesLabel_modifiedDate}" />
+					<h:outputText value="#{potentialContactCategoriesController.selected.modifiedDate}"
+						title="#{bundle.ViewPotentialContactCategoriesTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="PotentialContactCategoriesViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

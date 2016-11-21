@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templatelogin.xhtml">
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle['login.title']}" />
+	</ui:define>
+	
+
+	<ui:define name="body">
+
+		<p:panel header="#{bundle['login.title.login']}" >
+			<div align="center" >
+				<h:form>
+					<p:outputLabel for="usernameInput" value="#{bundle['login.label.username']}">
+
+					</p:outputLabel>
+					<p:inputText id="usernameInput" value="#{loginBean.username}" required="true" />
+					<br />
+					<p:outputLabel for="passwordInput" value="#{bundle['login.label.password']}  ">
+
+					</p:outputLabel>
+					<p:password id="passwordInput" value="#{loginBean.password}" feedback="true" inline="true" required="true" />
+					<br />
+					<p:commandButton value="${bundle['login.title.login']}" update=":growl" action="#{loginBean.login}">
+
+					</p:commandButton>
+				</h:form>
+			</div>
+		</p:panel>
+
+	</ui:define>
+
+</ui:composition>
+</html>

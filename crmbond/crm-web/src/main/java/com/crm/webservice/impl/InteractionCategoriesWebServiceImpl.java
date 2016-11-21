@@ -1,0 +1,76 @@
+/*
+ * To change this license header, choose License Headers in Project Properties. To change this
+ * template file, choose Tools | Templates and open the template in the editor.
+ */
+package com.crm.webservice.impl;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import com.crm.entities.InteractionCategories;
+import com.crm.webservice.AbstractFacade;
+import com.crm.webservice.InteractionCategoriesWebService;
+
+/**
+ *
+ * @author abuzo
+ */
+@Stateless
+@WebService(portName = "InteractionCategoriesWebService",
+serviceName = "InteractionCategoriesWebService",
+endpointInterface = "com.crm.webservice.InteractionCategoriesWebService",
+targetNamespace = "http://crm.com/wsdl")
+public class InteractionCategoriesWebServiceImpl extends AbstractFacade<InteractionCategories> implements InteractionCategoriesWebService<InteractionCategories> {
+
+	@PersistenceContext(unitName = "CRMPU")
+	private EntityManager em;
+
+	public InteractionCategoriesWebServiceImpl() {
+
+		super(InteractionCategories.class);
+	}
+	@WebMethod
+	@Override
+	public void create(InteractionCategories entity) {
+
+		super.create(entity);
+	}
+	@WebMethod
+	public void edit(Integer id, InteractionCategories entity) {
+
+		super.edit(entity);
+	}
+	@WebMethod
+	public void remove(Integer id) {
+
+		super.remove(super.find(id));
+	}
+	@WebMethod
+	public InteractionCategories find(Integer id) {
+
+		return super.find(id);
+	}
+	@WebMethod
+	@Override
+	public List<InteractionCategories> findAll() {
+
+		return super.findAll();
+	}
+	@WebMethod
+	public List<InteractionCategories> findRange(Integer from, Integer to) {
+
+		return super.findRange(new int[] {from, to});
+	}
+
+
+	@Override
+	protected EntityManager getEntityManager() {
+
+		return em;
+	}
+}

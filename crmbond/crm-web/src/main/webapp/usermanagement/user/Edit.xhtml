@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:crm="http://xmlns.jcp.org/jsf/composite/crm">
+
+<ui:composition>
+
+	<p:dialog id="UserEditDlg" widgetVar="UserEditDialog" modal="true" maximizable="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.EditUserTitle}">
+		<h:form id="UserEditForm">
+			<p:tabView effect="fade" effectDuration="normal">
+
+				<p:tab title="User">
+					<h:panelGroup id="display">
+						<p:panelGrid columns="4" rendered="#{userController.selected != null}">
+							<p:outputLabel value="#{bundle.EditUserLabel_name}" for="name" />
+							<p:inputText id="name" value="#{userController.selected.name}" title="#{bundle.EditUserTitle_name}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_name}" />
+							<p:outputLabel value="#{bundle.EditUserLabel_surname}" for="surname" />
+							<p:inputText id="surname" value="#{userController.selected.surname}" title="#{bundle.EditUserTitle_surname}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_surname}" />
+							<p:outputLabel value="#{bundle.EditUserLabel_userName}" for="userName" />
+							<p:inputText id="userName" value="#{userController.selected.userName}" title="#{bundle.EditUserTitle_userName}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_userName}" />
+
+							<p:outputLabel value="#{bundle.EditUserLabel_address}" for="address" />
+							<p:inputText id="address" value="#{userController.selected.address}" title="#{bundle.EditUserTitle_address}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_address}" />
+							<p:outputLabel value="#{bundle.EditUserLabel_phone}" for="phone" />
+							<p:inputText id="phone" value="#{userController.selected.phone}" title="#{bundle.EditUserTitle_phone}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_phone}" />
+							<p:outputLabel value="#{bundle.EditUserLabel_mobile}" for="mobile" />
+							<p:inputText id="mobile" value="#{userController.selected.mobile}" title="#{bundle.EditUserTitle_mobile}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_mobile}" />
+							<p:outputLabel value="#{bundle.EditUserLabel_type}" for="type" />
+							<p:inputText id="type" value="#{userController.selected.type}" title="#{bundle.EditUserTitle_type}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_type}" />
+							<p:outputLabel value="#{bundle.EditUserLabel_userID}" for="userID" />
+							<p:inputText id="userID" value="#{userController.selected.userID}" title="#{bundle.EditUserTitle_userID}" required="true"
+								requiredMessage="#{bundle.EditUserRequiredMessage_userID}" />
+
+
+
+							<p:outputLabel value="Roles" for="advanced" />
+
+							<p:selectManyMenu id="advanced" value="#{userController.selected.roles}" converter="roleConverter" var="t" showCheckbox="true">
+								<f:selectItems value="#{rolesController.itemsAvailableSelectMany}" var="role" collectionType="java.util.ArrayList"
+									itemLabel="#{role.description}" itemValue="#{role}" />
+
+								<p:column>
+									<h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
+								</p:column>
+
+								<p:column>
+									<h:outputText value="#{t.description}" />
+								</p:column>
+							</p:selectManyMenu>
+
+
+						</p:panelGrid>
+						<crm:generals item="#{bussinessTypesController.selected}" />
+
+					</h:panelGroup>
+				</p:tab>
+				<p:tab title="Role Rights">
+					<p:dataTable value="#{userController.selected.userpermissions}" var="permission" paginator="true" rows="10" rowsPerPageTemplate="10,20,30,40,50"
+						scrollHeight="400" scrollable="true" liveScroll="true" resizableColumns="true" liveResize="true" draggableColumns="true" style="width: 600px">
+						<p:column headerText="Role">
+							<h:outputText value="#{permission.rightRefID.roleID.name}" />
+						</p:column>
+						<p:column headerText="Right">
+							<h:outputText value="#{permission.rightRefID.name}" />
+						</p:column>
+						<p:column headerText="Read">
+							<p:selectBooleanCheckbox value="#{permission.readRight}"></p:selectBooleanCheckbox>
+						</p:column>
+						<p:column headerText="Write">
+							<p:selectBooleanCheckbox value="#{permission.writeRight}"></p:selectBooleanCheckbox>
+						</p:column>
+						<p:column headerText="Excecute">
+							<p:selectBooleanCheckbox value="#{permission.executeRight}"></p:selectBooleanCheckbox>
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+			<p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" update="@form,:UserListForm:datalist,:growl"
+				oncomplete="handleSubmit(args, 'UserEditDialog');" />
+			<p:commandButton value="#{bundle.Cancel}" onclick="UserEditDialog.hide()" />
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

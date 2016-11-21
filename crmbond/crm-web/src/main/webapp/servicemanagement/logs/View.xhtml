@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="LogsViewDlg" widgetVar="LogsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLogsTitle}">
+		<h:form id="LogsViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{logsController.selected != null}">
+					<h:outputText value="#{bundle.ViewLogsLabel_id}" />
+					<h:outputText value="#{logsController.selected.id}" title="#{bundle.ViewLogsTitle_id}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_interactionID}" />
+					<h:outputText value="#{logsController.selected.interactionID}" title="#{bundle.ViewLogsTitle_interactionID}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_userID}" />
+					<h:outputText value="#{logsController.selected.userID}" title="#{bundle.ViewLogsTitle_userID}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_note}" />
+					<h:outputText value="#{logsController.selected.note}" title="#{bundle.ViewLogsTitle_note}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_interactionStatus}" />
+					<h:outputText value="#{logsController.selected.interactionStatus}" title="#{bundle.ViewLogsTitle_interactionStatus}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_timePeriod}" />
+					<h:outputText value="#{logsController.selected.timePeriod}" title="#{bundle.ViewLogsTitle_timePeriod}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_interactionType}" />
+					<h:outputText value="#{logsController.selected.interactionType}" title="#{bundle.ViewLogsTitle_interactionType}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_contactID}" />
+					<h:outputText value="#{logsController.selected.contactID}" title="#{bundle.ViewLogsTitle_contactID}" />
+					<h:outputText value="#{bundle.ViewLogsLabel_type}" />
+					<h:outputText value="#{logsController.selected.createdDate}" title="#{bundle.ViewLogsTitle_createdDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewLogsLabel_modifiedDate}" />
+					<h:outputText value="#{logsController.selected.modifiedDate}" title="#{bundle.ViewLogsTitle_modifiedDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="LogsViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

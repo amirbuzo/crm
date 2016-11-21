@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/user/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="Schedule"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="schedule">
+			<p:panelGrid>
+				<h3 style="margin-top: 0">Editable Schedule</h3>
+				<p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT+2" locale="#{userManager.locale}">
+					<p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+					<p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+					<p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="growl" />
+					<p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="growl" />
+				</p:schedule>
+			</p:panelGrid>
+
+			<p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+				<h:panelGrid id="eventDetails" columns="2">
+					<p:outputLabel for="title" value="Titles:" />
+					<p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
+
+					<p:outputLabel for="from" value="From:" />
+					<p:calendar id="from" value="#{scheduleView.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
+
+					<p:outputLabel for="to" value="To:" />
+					<p:calendar id="to" value="#{scheduleView.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
+
+					<p:outputLabel for="allDay" value="All Day:" />
+					<h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}" />
+
+					<p:commandButton type="reset" value="Reset" />
+					<p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}"
+						oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<script type="text/javascript">
+    PrimeFaces.locales['sq'] = {
+        closeText: 'Mbyll',
+        prevText: 'Pas',
+        nextText: 'Para',
+        currentText: 'Sot',
+        monthNames: ['Janar','Shkurt','Mars','Prill','Maj','Qershor',
+            'Korrik','Gusht','Shtator','Tetor','Nentor','Dhjetor'],
+        monthNamesShort: ['Jan','Shku','Mar','Pri','Maj','Qer',
+            'Kor','Gus','Sht','Tet','Nen','Dhje'],
+        dayNames: ['Hene','Marte','Merrkure','Enjte','Premte','Shtune','Diele'],
+        dayNamesShort: ['He','Ma','Mer','Enj','Pre','Sht','Die'],
+        dayNamesMin: ['He','Ma','Mer','Enj','Pre','Sht','Die'],
+        weekHeader: 'Hf',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
+        month: 'Muaj',
+        week: 'Java',
+        day: 'Dita',
+        allDayText : 'Gjithe Dita'
+    };
+</script>
+		<style type="text/css">
+.value {
+	width: 1000px;
+}
+</style>
+	</ui:define>
+</ui:composition>
+
+</html>
+

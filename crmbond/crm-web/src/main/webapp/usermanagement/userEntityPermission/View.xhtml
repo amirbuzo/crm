@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="UserEntityPermissionViewDlg" widgetVar="UserEntityPermissionViewDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.ViewUserEntityPermissionTitle}">
+		<h:form id="UserEntityPermissionViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{userEntityPermissionController.selected != null}">
+					<h:outputText value="#{bundle.ViewUserEntityPermissionLabel_id}" />
+					<h:outputText value="#{userEntityPermissionController.selected.id}" title="#{bundle.ViewUserEntityPermissionTitle_id}" />
+					<h:outputText value="#{bundle.ViewUserEntityPermissionLabel_userRefID}" />
+					<h:outputText value="#{userEntityPermissionController.selected.userRefID}" title="#{bundle.ViewUserEntityPermissionTitle_userRefID}" />
+					<h:outputText value="#{bundle.ViewUserEntityPermissionLabel_entityType}" />
+					<h:outputText value="#{userEntityPermissionController.selected.entityType}" title="#{bundle.ViewUserEntityPermissionTitle_entityType}" />
+					<h:outputText value="#{bundle.ViewUserEntityPermissionLabel_entityID}" />
+					<h:outputText value="#{userEntityPermissionController.selected.entityID}" title="#{bundle.ViewUserEntityPermissionTitle_entityID}" />
+					<h:outputText value="#{bundle.ViewUserEntityPermissionLabel_userID}" />
+					<h:outputText value="#{userEntityPermissionController.selected.userID}" title="#{bundle.ViewUserEntityPermissionTitle_userID}" />
+					<h:outputText value="#{bundle.ViewUserEntityPermissionLabel_CDate}" />
+					<h:outputText value="#{userEntityPermissionController.selected.createdDate}" title="#{bundle.ViewUserEntityPermissionTitle_CDate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{bundle.ViewUserEntityPermissionLabel_lastUpdate}" />
+					<h:outputText value="#{userEntityPermissionController.selected.modifiedDate}" title="#{bundle.ViewUserEntityPermissionTitle_lastUpdate}">
+						<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}" onclick="UserEntityPermissionViewDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

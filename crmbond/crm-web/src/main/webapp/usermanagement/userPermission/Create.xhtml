@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="UserPermissionCreateDlg" widgetVar="UserPermissionCreateDialog" modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.CreateUserPermissionTitle}">
+		<h:form id="UserPermissionCreateForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2" rendered="#{userPermissionController.selected != null}">
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_userPermissionPK_rightRefID}" for="userPermissionPK_rightRefID" />
+					<p:inputText id="userPermissionPK_rightRefID" value="#{userPermissionController.selected.rightRefID}"
+						title="#{bundle.CreateUserPermissionTitle_userPermissionPK_rightRefID}" required="true"
+						requiredMessage="#{bundle.CreateUserPermissionRequiredMessage_userPermissionPK_rightRefID}" />
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_id}" for="id" />
+					<p:inputText id="id" value="#{userPermissionController.selected.id}" title="#{bundle.CreateUserPermissionTitle_id}" required="true"
+						requiredMessage="#{bundle.CreateUserPermissionRequiredMessage_id}" />
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_readRight}" for="readRight" />
+					<p:selectBooleanCheckbox id="readRight" value="#{userPermissionController.selected.readRight}" required="true"
+						requiredMessage="#{bundle.EditUserPermissionRequiredMessage_readRight}" />
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_writeRight}" for="writeRight" />
+					<p:selectBooleanCheckbox id="writeRight" value="#{userPermissionController.selected.writeRight}" required="true"
+						requiredMessage="#{bundle.EditUserPermissionRequiredMessage_writeRight}" />
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_executeRight}" for="executeRight" />
+					<p:selectBooleanCheckbox id="executeRight" value="#{userPermissionController.selected.executeRight}" required="true"
+						requiredMessage="#{bundle.EditUserPermissionRequiredMessage_executeRight}" />
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_userID}" for="userID" />
+					<p:inputText id="userID" value="#{userPermissionController.selected.userRefID}" title="#{bundle.CreateUserPermissionTitle_userID}"
+						required="true" requiredMessage="#{bundle.CreateUserPermissionRequiredMessage_userID}" />
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_CDate}" for="CDate" />
+					<p:calendar id="CDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{userPermissionController.selected.createdDate}"
+						title="#{bundle.EditUserPermissionTitle_CDate}" required="true" requiredMessage="#{bundle.EditUserPermissionRequiredMessage_CDate}"
+						showOn="button" />
+					<p:outputLabel value="#{bundle.CreateUserPermissionLabel_lastUpdate}" for="lastUpdate" />
+					<p:calendar id="lastUpdate" pattern="MM/dd/yyyy HH:mm:ss" value="#{userPermissionController.selected.modifiedDate}"
+						title="#{bundle.EditUserPermissionTitle_lastUpdate}" required="true" requiredMessage="#{bundle.EditUserPermissionRequiredMessage_lastUpdate}"
+						showOn="button" />
+				</p:panelGrid>
+				<p:commandButton actionListener="#{userPermissionController.create}" value="#{bundle.Save}"
+					update="display,:UserPermissionListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserPermissionCreateDialog');" />
+				<p:commandButton value="#{bundle.Cancel}" onclick="UserPermissionCreateDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

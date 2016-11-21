@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/usermanagement/template.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListUserPermissionTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form id="UserPermissionListForm">
+			<p:panel header="#{bundle.ListUserPermissionTitle}">
+				<p:contextMenu for="datalist">
+
+					<p:menuitem id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{userPermissionController.prepareCreate}"
+						update=":UserPermissionCreateForm" oncomplete="PF('UserPermissionCreateDialog').show()" />
+					<p:menuitem id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":UserPermissionViewForm"
+						oncomplete="PF('UserPermissionViewDialog').show()" />
+					<p:menuitem id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UserPermissionEditForm"
+						oncomplete="PF('UserPermissionEditDialog').show()" />
+					<p:menuitem id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{userPermissionController.destroy}"
+						update=":growl,datalist" />
+
+				</p:contextMenu>
+				<p:dataTable id="datalist" value="#{userPermissionController.items}" var="item" selectionMode="single"
+					selection="#{userPermissionController.selected}" paginator="true" rowKey="#{item.id}" rows="10" rowsPerPageTemplate="10,20,30,40,50">
+
+					<p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton" />
+					<p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton" />
+
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_userPermissionPK_userRefID}" />
+						</f:facet>
+						<h:outputText value="#{item.userRefID}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_userPermissionPK_rightRefID}" />
+						</f:facet>
+						<h:outputText value="#{item.rightRefID}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_id}" />
+						</f:facet>
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_readRight}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.readRight}" disabled="true" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_writeRight}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.writeRight}" disabled="true" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_executeRight}" />
+						</f:facet>
+						<p:selectBooleanCheckbox value="#{item.executeRight}" disabled="true" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_userID}" />
+						</f:facet>
+						<h:outputText value="#{item.userRefID}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_CDate}" />
+						</f:facet>
+						<h:outputText value="#{item.createdDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListUserPermissionTitle_lastUpdate}" />
+						</f:facet>
+						<h:outputText value="#{item.modifiedDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{userPermissionController.prepareCreate}"
+							update=":UserPermissionCreateForm" oncomplete="PF('UserPermissionCreateDialog').show()" />
+						<p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":UserPermissionViewForm"
+							oncomplete="PF('UserPermissionViewDialog').show()" disabled="#{empty userPermissionController.selected}" />
+						<p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UserPermissionEditForm"
+							oncomplete="PF('UserPermissionEditDialog').show()" disabled="#{empty userPermissionController.selected}" />
+						<p:commandButton id="deleteButton" icon="ui-icon-trash" value="#{bundle.Delete}" actionListener="#{userPermissionController.destroy}"
+							update=":growl,datalist" disabled="#{empty userPermissionController.selected}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<ui:include src="Create.xhtml" />
+		<ui:include src="Edit.xhtml" />
+		<ui:include src="View.xhtml" />
+	</ui:define>
+</ui:composition>
+
+</html>
