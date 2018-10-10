@@ -68,7 +68,6 @@ public abstract class AEntity implements Serializable {
 
 	public abstract Integer getId();
 
-
 	@Override
 	public abstract boolean equals(Object object);
 

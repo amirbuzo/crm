@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Helper class to deal with JSF.
  *
- * @author Ignas
+ * @author Amir Buzo
  *
  */
 public final class FacesUtils {

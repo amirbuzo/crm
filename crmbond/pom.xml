@@ -6,8 +6,7 @@
   <packaging>pom</packaging>
   <name>parent-crm</name>
   <modules>
-  	<module>crm-domain</module>
-  	<module>crm-test</module>
+   	<module>crm-test</module>
   	<module>crm-web</module>
   </modules>
   

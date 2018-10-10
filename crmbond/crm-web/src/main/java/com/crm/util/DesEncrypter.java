@@ -69,6 +69,6 @@ public class DesEncrypter {
 	public static void main(String[] args) {
 	
 		System.out.println(new DesEncrypter().encrypt("crm"));
-		System.out.println(new DesEncrypter().decrypt("kcAvXsdSL9s="));
+		//System.out.println(new DesEncrypter().decrypt("kcAvXsdSL9s="));
 	}
 }

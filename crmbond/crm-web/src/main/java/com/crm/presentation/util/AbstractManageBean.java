@@ -257,8 +257,6 @@ public abstract class AbstractManageBean<T extends AEntity> implements Serializa
 		return newfieldname;
 	}
 	
-	
-	
 	/**
 	 * @param newfieldname the newfieldname to set
 	 */

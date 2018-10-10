@@ -11,28 +11,6 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-/**
- * {@link MultiPageMessagesSupport} implements {@link PhaseListener}.
- * <p>
- * Purpose:
- * </p>
- * Enables messages to be rendered on different pages from which they were set.
- *
- * After each phase where messages may be added, this moves the messages from the page-scoped
- * FacesContext to the session-scoped session map.
- *
- * Before messages are rendered, this moves the messages from the session-scoped session map back to
- * the page-scoped FacesContext.
- *
- * Only global messages, not associated with a particular component, are moved. Component messages
- * cannot be rendered on pages other than the one on which they were added.
- *
- * To enable multi-page messages support, add a <code>lifecycle</code> block to your
- * faces-config.xml file. That block should contain a single <code>phase-listener</code> block
- * containing the fully-qualified classname of this file.
- *
- * @author ALCIRT
- */
 public class MultiPageMessagesSupport implements PhaseListener {
 
 	private static final long serialVersionUID = 1250469273857785274L;
